@@ -1,0 +1,279 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Lesson 01 - token initialization/registration</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+	<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+	<script src="tproecc_client/tProEccClientAPI.js"></script>
+	<script src="shared_libs/tutorialUtils.js"></script>
+	<style>
+		.prettyprint ol.linenums>li {
+			list-style-type: decimal;
+		}
+	</style>
+</head>
+
+<body style="background-color: #e8e8e8">
+	<div class="row">
+		<div class="col s6 offset-s3">
+			<p><h1>Lesson 01</h1> This lesson introduces basic TProEcc token management concepts. You will learn, how to query token to receive
+			data depicting its state. First usage of the token requires its initialization (pin creation and generation of ecc key pair). User will
+			have ability to change defined pin. Usage	of the token in the context of web application requires association between application user and token public key, which is also
+			demonstrated in this tutorial.</p>
+
+		</div>
+	</div>
+
+	<!--
+	 getTokenInfo card
+-->
+	<div class="row">
+		<div class="col s6 offset-s3">
+			<div class="card grey lighten-3">
+				<div class="card-content black-text">
+					<span class="card-title">1. getTokenInfo</span>
+					<p>This function should be called <b>before</b> any other functions and is used to obtain information regarding current state of the token (initialization status, existing publickey, pin status).</p>
+					<br><p><i><b>Please insert your tProEcc token into usb slot.</b></i></p>
+
+					<div class="card-action">
+						<a class="btn" id="buttonGetTokenInfo">getTokenInfo</a>
+						<a onclick="showCode(getTokenInfo);" class="waves-effect waves-light btn modal-trigger">Show Code</a>
+						<a class="btn" href="/doc/global.html#getTokenInfo" target="_blank">doc</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--
+	   init card
+	-->
+
+
+	<div id="cardInit" class="row">
+		<div class="col s6 offset-s3">
+			<div class="card grey lighten-3">
+				<div class="card-content black-text">
+					<span class="card-title">2. init(pin)</span>
+					<p>Init function is used to initialize token. The procedure involves setup of user pin and generation of public and private key pair. Pin is used in any operations,
+					which requires detection of the user presence (digital signature, initialization, etc.)
+
+				</p><br>
+				<p><b class="red-text">Warning - this operation destroys previously generated keys. If user is already registered, existing mapping between the user and key will be lost, therefore user needs to be registered again.</b></p>
+					<div class="card-action">
+						<div class="row">
+							<div class="input-field col s12">
+								<input id="pin" type="number" class="validate">
+								<label for="pin">PIN</label>
+							</div>
+						</div>
+						<a class="btn" id="buttonInit" modal>init</a>
+						<a onclick="showCode(init);" class="waves-effect waves-light btn modal-trigger">Show Code</a>
+						<a class="btn" href="/doc/global.html#init" target="_blank">doc</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--
+	   init card
+	-->
+
+
+	<div id="pinChange" class="row">
+		<div class="col s6 offset-s3">
+			<div class="card grey lighten-3">
+				<div class="card-content black-text">
+					<span class="card-title">3. pinChange</span>
+					<p>pinChange function is used to change token's Pin. Pin is used in any operations, which requires detection of the user presence (digital signature, initialization, etc.)</p>
+					<div class="card-action">
+						<div class="row">
+							<div class="input-field col s12">
+								<input id="oldpin" type="number" class="validate">
+								<label for="oldpin">Old PIN:</label>
+							</div>
+							<div class="input-field col s12">
+								<input id="newpin" type="number" class="validate">
+								<label for="newpin">New PIN:</label>
+							</div>
+							<div class="input-field col s12">
+								<input id="newpin2" type="number" class="validate">
+								<label for="newpin2">Reenter PIN:</label>
+							</div>
+						</div>
+						<a class="btn" id="buttonChangePin" modal>change Pin</a>
+						<a onclick="showCode(changePin);" class="waves-effect waves-light btn modal-trigger">Show Code</a>
+						<a class="btn" href="/doc/global.html#changePin" target="_blank">doc</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!--
+		  GET /registerUser/{userName}/{publicKeyHex}
+	  -->
+
+	<div id="cardRegisterUser" class="row">
+		<div class="col s6 offset-s3">
+			<div class="card grey lighten-3">
+				<div class="card-content black-text">
+					<span class="card-title">4. RestAPI call - command GET /registerUser/{userName}/{publicKeyHex}</span>
+					<p>Call to server side rest api in order to register user name with his/her corresponding public key. Registered user is then used in the subsequent lessons.
+						Association between public key and user allows for latter unambigous identification of the token user. This allows application to validate, who is accountable for creation of particular digital signature or who authenticated.</p>
+						<p>Parameters to API calls are:</p>
+						<p><b>userName</b> - name to the user to be created</p>
+						<p><b>publicKeyHex</b> - public key of the key pair generated by the token and hex endoded</p>
+					<div class="card-action">
+						<div class="row">
+							<div class="input-field col s12">
+								<input id="userNameText" type="text" class="validate">
+								<label for="userNameText">User Name:</label>
+							</div>
+						</div>
+						<a class="btn" id="buttonRegisterUser" modal>GET /registerUser...</a>
+						<a onclick="showCode(registerUser);" class="waves-effect waves-light btn modal-trigger">Show Code</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="dialogs"></div>
+
+</body>
+<script>
+	// load dialogs from dialogs.html
+	$("#dialogs").load("dialogs.html");
+	$("#cardInit").hide();
+	$("#pinChange").hide();
+	$("#cardRegisterUser").hide();
+
+
+	var api = require('TProEccSimpleAPI');
+	var TProEccAPI = new api();
+	var pubKey = null;
+
+	/***
+	 getTokenInfo
+	 ***/
+
+	$("#buttonGetTokenInfo").click(getTokenInfo);
+
+	function getTokenInfo() {
+		//showWait(); // [DEMO] show token waiting animation
+		TProEccAPI.getTokenInfo(function(error, data) {
+			//hideWait(); // [DEMO] hides wait windows
+			if (error === null) {
+				showDialogJSON("getTokenInfo", data);
+				$("#cardInit").show(); // [DEMO] // shows Init card
+			} else {
+				showDialogError("getTokenInfo", error.desc);
+			}
+		});
+	}
+
+	$("#buttonInit").click(init);
+
+
+	/***
+	 change Pin
+	 ***/
+	$("#buttonChangePin").click(changePin);
+
+	function changePin() {
+		// [DEMO-START]
+		// check if pin is not empty
+		if ($('#oldpin').val() === "") {
+			showDialogWarn("old pin is empty");
+			return;
+		}
+		if ($('#newpin').val() === "") {
+			showDialogWarn("new pin is empty");
+			return;
+		}
+		if ($('#newpin2').val() === "") {
+			showDialogWarn("reenter pin is empty");
+			return;
+		}
+		if ($('#newpin2').val() !== $('#newpin').val()) {
+			showDialogWarn("new pins are different");
+			return;
+		}
+		showPushPutton();
+		// [DEMO-END]
+		var param = {};
+		param.oldPin = $('#oldpin').val();
+		param.newPin = $('#newpin').val();
+		TProEccAPI.changePin(param,function(error, data) {
+			hidePushPutton(); // [DEMO] hide push button animation
+			if (error === null) {
+				showDialogInfo("changePin", "ok");
+				$("#cardRegisterUser").show(); // [DEMO] show registerUser card
+			} else {
+				showDialogError("init", error.desc);
+			}
+		});
+	}
+
+
+
+
+	/***
+	 init
+	 ***/
+
+	function init() {
+		// [DEMO-START]
+		// check if pin is not empty
+		if ($('#pin').val() === "") {
+			showDialogWarn("pin is empty");
+			return;
+		}
+		showPushPutton();
+		// [DEMO-END]
+		TProEccAPI.init($('#pin').val(), function(error, data) {
+			hidePushPutton(); // [DEMO] hide push button animation
+			if (error === null) {
+				showDialogJSON("init", data);
+				pubKey = data.pub; // token public key assigned to variable pubKey
+				$("#pinChange").show(); // [DEMO] show changePin card
+			} else {
+				showDialogError("init", error.desc);
+			}
+		});
+	}
+
+
+
+	/***
+	 registerUser
+	 ***/
+
+	$("#buttonRegisterUser").click(registerUser);
+
+	function registerUser() {
+		// [DEMO-START]
+		if ($('#userNameText').val() === "") {
+			showDialogWarn("User Name is empty");
+			return;
+		}
+		if(pubKey===null) alert('pubKey is null');
+		// [DEMO-END]
+		var url = "/registerUser/" + $('#userNameText').val() + "/" + pubKey;
+		$.get(url, function(data) {
+				showDialogInfo("GET /registerUser...", data);
+			})
+			.fail(function(jqXHR) {
+				showDialogError("GET /registerUser...", jqXHR.responseText);
+			});
+	}
+</script>
+
+</html>

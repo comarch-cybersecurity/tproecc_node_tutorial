@@ -1,0 +1,230 @@
+<!DOCTYPE HTML>
+<html lang="pl-PL">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Lesson 02 - token initialization/registration</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+	<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+	<script src="tproecc_client/tProEccClientAPI.js"></script>
+	<script src="shared_libs/tutorialUtils.js"></script>
+	<style>
+		.prettyprint ol.linenums>li {
+			list-style-type: decimal;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="row">
+		<div class="col s6 offset-s3">
+			<h1>Lesson 02</h1>
+			<p>Second tutorial introduces message digest, signature creation and verification functionalities. Before you start to dive into this tutorial, please refer to tutorial one and become familiar with concepts described there. This tutorial assumes that
+				you sucessfully initialized token and created user as it was demonstrated in Tutorial01. If not please startover with Tutorial01.</p>
+			<p>Signature generation is performed in the browser and involves communication with TPro token and requires user interaction (pin entry and push of the button. Verification of the signature is provided as rest service, which is invoked from the browser.
+				Rest service obtains public key associated with the user in user registration process (please refer to Tutorial01). Mentioned association ensures, that not only signature is properly generated but also identifies, who signed the message digest.</p>
+		</div>
+	</div>
+
+
+
+	<!--
+	   getTokenInfo()
+	-->
+	<div class="row">
+
+		<div class="col s6 offset-s3">
+			<div class="card grey lighten-3">
+				<div class="card-content black-text">
+					<h4>getTokenInfo</h4>
+					<p>This function should be called <b>before</b> any other functions and is used to obtain information regarding current state of the token (initialization status, existing publickey, pin status). Now we are expecting, status of the token to be initialized
+						with generated key pair.</p>
+					<div class="card-action">
+						<a class="btn" id="buttonGetTokenInfo" modal>getTokenInfo</a>
+						<a onclick="showCode(getTokenInfo);" class="waves-effect waves-light btn modal-trigger">Show Code</a>
+						<a class="btn" href="/doc/global.html#getTokenInfo" target="_blank">doc</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--
+	   digestMessage(message)
+	-->
+		<div id="digestMessage" class="row">
+			<div class="col s6 offset-s3">
+				<div class="card grey lighten-3">
+					<div class="card-content black-text">
+						<h4>digest message</h4>
+						<p>dgst function is user to calculate sha256 message digest. Cryptographic digest functions converts arbitrary length documents into fixed length digest, which are fingerprints of the documents. Please refer to pdf documentation to understand better
+							the role of message digest in digital signature schemes.</p>
+						<div class="card-action">
+							<div class="row">
+								<div class="input-field col s12">
+									<input id="message" type="text">
+									<label for="message">Message </label>
+								</div>
+							</div>
+							<a class="btn" id="buttonDigest" modal>Digest</a>
+							<a onclick="showCode(digest);" class="waves-effect waves-light btn modal-trigger">Show Code</a>
+							<a class="btn" href="/doc/global.html#dgst" target="_blank">doc</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--
+		   sign digestMessage(message)
+		-->
+		<div id="signDigest" class="row">
+			<div class="col s6 offset-s3">
+				<div class="card grey lighten-3">
+					<div class="card-content black-text">
+						<h4>sign</h4>
+						<p>sign uses TProEcc token to generate ECDSA (Elipptic Curves Digital Signature Algoritm) signature. Private key store in the device is used to generate signature of provided sha256 digest. Because usage of private key is sensitive operation, user
+							needs to input pin protecting access to the token. Pin was defined in Tutorial01 in init operation.</p>
+						<div class="card-action">
+							<div class="row">
+								<div class="input-field col s12">
+									<input id="pin" type="text">
+									<label for="pin">PIN </label>
+								</div>
+							</div>
+							<a class="btn" id="buttonSign" modal>Sign</a>
+							<a onclick="showCode(sign);" class="waves-effect waves-light btn modal-trigger">Show Code</a>
+							<a class="btn" href="/doc/global.html#sign" target="_blank">doc</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--
+		  GET /verifySignature/{userId}/{messageDigest}/{signature}
+	  -->
+
+		<div id="verifyDigest" class="row">
+			<div class="col s6 offset-s3">
+				<div class="card grey lighten-3">
+					<div class="card-content black-text">
+						<h4>GET /verifySignature/{userId}/{messageDigest}/{signature}</h4>
+						<p>Call to server side rest api - verify signature. </p>
+						<div class="card-action">
+							<div class="row">
+								<div class="input-field col s12">
+									<input id="userNameText" type="text" class="validate">
+									<label for="userNameText">User Name:</label>
+								</div>
+							</div>
+							<a class="btn" id="buttonVerify" modal>GET /verifySignature...</a>
+							<a onclick="showCode(verify);" class="waves-effect waves-light btn modal-trigger">Show Code</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="dialogs"></div>
+
+</body>
+
+<script>
+	// load dialogs from dialogs.html
+	$("#dialogs").load("dialogs.html");
+	var api = require('TProEccSimpleAPI');
+	var TProEccAPI = new api();
+	var dgst = "";
+	var signature = "";
+
+	$("#digestMessage").hide();
+	$("#signDigest").hide();
+	$("#verifyDigest").hide();
+
+
+	/***
+	 getTokenInfo
+	 ***/
+
+	$("#buttonGetTokenInfo").click(getTokenInfo);
+
+	function getTokenInfo() {
+		//showWait(); // [DEMO] show token waiting animation
+		//var timeoutSec = 10; // device connection timeout=10sec
+
+		TProEccAPI.getTokenInfo(function(error, data) {
+			//hideWait(); // [DEMO] hides wait windows
+			if (error === null) {
+				showDialogJSON("getTokenInfo", data);
+				$("#digestMessage").show(); // [DEMO] // shows Init card
+			} else {
+				showDialogError("getTokenInfo", error.desc + " (" + error.err + ")");
+			}
+		});
+	}
+
+
+	$("#buttonDigest").click(digest);
+
+	function digest() {
+		// [DEMO-START]
+		if ($('#message').val() == "") {
+			showDialogWarn("message is empty");
+			return;
+		}
+		// [DEMO-END]
+		dgst = TProEccAPI.dgst($('#message').val()); // message digest assigned to variable dgst
+		// [DEMO-START]
+		showDialogInfo("dgst", "dgst: " + dgst);
+		$("#signDigest").show();
+		// [DEMO-END]
+	}
+
+	$("#buttonSign").click(sign);
+
+	function sign() {
+		// [DEMO-START]
+		if ($('#pin').val() == "") {
+			showDialogWarn("pin is empty");
+			return;
+		}
+		showPushPutton();
+		// [DEMO-END]
+		var param = {};
+		param.pin = $('#pin').val();
+		param.dgst = dgst;
+		TProEccAPI.sign(param, function(error, data) {
+			hidePushPutton(); // [DEMO] hide push button animation
+			if (error === null) {
+				showDialogJSON("sign", data);
+				signature = data.sgn; // signature assigned to variable signature
+				$("#verifyDigest").show(); // [DEMO] show verifyDigest card
+			} else {
+				showDialogError("sign", error.desc + " (" + error.err + ")");
+			}
+		});
+	}
+
+
+
+	$("#buttonVerify").click(verify);
+
+	function verify() {
+		// [DEMO-START]
+		if ($('#userNameText').val() == "") {
+			showDialogWarn("User Name is empty");
+			return;
+		}
+		// [DEMO-END]
+		var url = "/verifySignature/" + $('#userNameText').val() + "/" + dgst + "/" + signature;
+		$.get(url, function(data) {
+				showDialogInfo("GET /verifySignature...", data);
+			})
+			.fail(function(jqXHR) {
+				showDialogError("GET /verifySignature...", jqXHR.responseText);
+			});
+	}
+</script>
+
+</html>

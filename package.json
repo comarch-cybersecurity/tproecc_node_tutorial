@@ -1,0 +1,27 @@
+{
+  "name": "tproecc_node_tutorial",
+  "version": "0.0.94",
+  "description": "tpro ecc tutorial node token device",
+  "main": "lesson01.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/comarch-cybersecurity/tproecc_node_tutorial.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/comarch-cybersecurity/tproecc_node_tutorial/issues"
+  },
+  "homepage": "https://github.com/comarch-cybersecurity/tproecc_node_tutorial#readme",
+  "dependencies": {
+    "express": "^4.14.0",
+    "express-session": "^1.14.2",
+    "morgan": "^1.7.0",
+    "tingodb": "^0.4.2",
+    "hash.js":"",
+    "tproecc_server": "^0.9.1"
+  }
+}

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: tProEccAPI.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: tProEccAPI.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+	* @file Browser side communication with tPro Ecc token is being handled by &lt;b> TProEccAPI &lt;/b> class, which provides interface to directly access device functionalities such as:
+	* &lt;br> - token initialization/deinitialization,
+	* &lt;br> - generation of new ECC key-pair as well as their erasure,
+	* &lt;br> - digital signature of delivered content,
+	* &lt;br> - functions concerning PIN policy,
+	* &lt;br> - obtaining detailed information about token's state.
+*/
+
+/**
+ * TProEccAPI
+ * @class
+ * @classdesc Methods, which this class provides, are dedicated for communicating with tPro Ecc in order to perform cryptographic operations on the device.
+ */
+function TProEccAPI()
+{
+    this.PIN_APP_REPLACE_STRING = "3131313100";
+    this.PUK_APP_REPLACE_STRING = "323232323232323200";
+    this.KEY_APP_REPLACE_STRING = "3333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333300";
+    this.HASH_APP_REPLACE_STRING = "343434343434343434343434343434343434343434343434343434343434343400";
+    this.SLOT_ID_REPLACE_STRING = "3700";
+    this.KEY_NAME_APP_REPLACE_STRING = "38383838383838383838383800";
+    this.INIT_APP = "589A3DC2570B62D7E051DDE6F3F1913079EF60DB73274CDF05803B03D68B9589BC0F451C42A5BE04D2EE0D81397FF843FF43B454147C46992009DCB3B710AF610020001E0000020200FE01FE080180080B800A00000096641100008604000006040102020202020A3131313100";
+    this.DEINIT_APP = "F1BDBDB3E9BABDA8BC2B448B580A10BAA85F5DC5B69503BEDADF7E78AA151A1DFEFDC5726E2A6066E944EF7D60D56AF778D2AD81B34242DA161466A2283421F6001C001A0000020200FE01FE0814800A00000096640100000064100000820101";
+    this.GET_TOKEN_INFO_APP = "98FB80E5466D18A5E5009B4BAD656C7C0DFFF1F06705F6EA2B22B258D7843C16825BF6F340760D230AC3C6B772B540B834FDEDA3230B784CC5A65B7CBD73BE13001200100000020200FE01FE081C800A00008001";
+	this.CHANGE_PIN_APP = "C6E8E2585D8E74ECAE16F0E1EB14E93DBA53B6FCCF96FAB48EE0C191C4FE0E803504698DD84848C1820DCF4C26C29FCC11AF3F16FBC89DA7F14CA9D4F02E54080030002E00C8020300FE01FE03FE0400000004010400000504030801800804800809800A0000009664000000006411000A82353535350036363636000505";
+	this.UNBLOCK_PIN_APP = "B49A47BC9C987247738B211C46689460DE1AB4C79D001920194F7A03385D4494B9229ECF3844485C0363D02AC10FEA50568C5BC31C23EE1B9FF83465224A429F002E002C0000020200FE01FE0400000008010400000904030801800804800803800A0000009664000000006411000E8232323232323232320031313131000101";
+    this.GENERATE_KEY_APP = "6B91879AECADB311672705508424C22C38A381EA76A9160B5BC4D908D585F3B0269F7986B88FB14C7B27FCB5A63212098497A28235032126C3A5466B7142A3A50028002600C8020300FE01FE03FE040000000401040000050C09080180081E800A00000096641100128631313131003838383838383838383838380002020202020A";
+    this.DELETE_KEY_APP = "57D4D6514284296853C99F07132F0C9836FE8F3940A58BED4DB25AF1093645E65A069E5B378B1826F7F623CCC7DBD1EF65055314DD799C7FA6D0F21D86B409530028002600C8020300FE01FE03FE040000000401040000054008080180080E800A000000966410004682313131310033333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333000101";
+    this.GET_PUB_KEY_APP = "8611A9B741DAA404198CC43FE44C24B93355BAB422EDF862714C2A1AD45544C1DDFB55836F00D72A6416B3CC4017E0B9CCF987A19D1A9F2229831BB4CFE5DCDE001A001800C8020300FE01FE03FE0400000001010820800A000080013700";
+    this.SIGN_APP = "72614161890DAAB6B2B1E0A376575A68DF55DCEAF3CF4679A82DF6F6B60A740CE1731BCD0D7726291EFB39BE46DAEF0B97351101DD8F69E929526E3172313A1F002E002C00C8020300FE01FE03FE0400000004010400000520060400002640080801800811800A000000966410006786313131310034343434343434343434343434343434343434343434343434343434343434340033333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333000A0202020202";
+    this.GET_PUK_APP = "710F2ADA01A005F8EFDAAD3A545C21A1052138785DC18A999CCFA6BFFF1A66F23054D99767EE6B51B146B6F24DF4FDDC3FE7AC2B9E49EC7FE5821FA4A5C136BE001D001B0000020200FE01FE040000000401081D800A0000009664000000003131313100";
+    this.GET_CERT_BY_SLOT_APP ="9042BD2D917E6CC85A00CC53D35CCE65A99A0DDBDF2F27F2D1835E85069D77F53888806CDCA8E4A95066EFCF45439939C7E23BB2FC5262A581474D06E37E1AA1001F001D00C8020300FE01FE03FE04000000010D0822800A00008001641000028231000101";
+    this.GET_CERT_BY_SLOT_APP_REPLACE_STRING ="31";
+	this.DELETE_CERT_APP = "57D4D6514284296853C99F07132F0C9836FE8F3940A58BED4DB25AF1093645E65A069E5B378B1826F7F623CCC7DBD1EF65055314DD799C7FA6D0F21D86B409530028002600C8020300FE01FE03FE040000000401040000054008080180080E800A000000966410004682313131310033333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333000101";
+    this.UPDATE_CERT_APP = "293522C3606661FB6E28EAC0AFF0F271A0C4ACDF6A9E82A3B9DF8C56CED83A5BA48E8190758CB4F126DB6308E152280F52B8C7A014EEDCCFF24EEAF811CB0CF40020001E00C8020300FE01FE03FE04000000400806004104000E0821800A000080003131313131313131313131313131313131313131313131313131313131313131313131313131313131313131313131313131313131313131313131313131313100AAAA3232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323200";
+    this.UPDATE_CERT_APP_KEY_REPLACE_STRING = "31313131313131313131313131313131313131313131313131313131313131313131313131313131313131313131313131313131313131313131313131313131";
+    this.UPDATE_CERT_APP_CERT_LENGTH_REPLACE_STRING = "AAAA";
+    this.UPDATE_CERT_APP_CERT_REPLACE_STRING ="32323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232";
+    var communication = require("./helpers/ws.js");
+	this.c = new communication();
+	var utils = require("./helpers/functions.js");
+	this.u = new utils();
+	var err = require("./helpers/errorCodes.js");
+	this.e = new err();
+}
+/**
+ * Initialize token and set pin.
+ * @function init
+ * @param {string}  param - pin provided by user
+ * @param {initCallback} callback - the callback that handles the response.
+ */
+ /**
+ * @callback initCallback
+ * @param {number}  error - status of operation, EXIT_CODE_ACCEPT (0) means success
+ */
+TProEccAPI.prototype.init = function(param, callback)
+{
+    var app = this.INIT_APP;
+    var pinHex = this.u.stringToHex(param);
+    app = this.u.replaceRes( app,  this.PIN_APP_REPLACE_STRING, pinHex );
+    this.c.doConnect(app, callback);
+}
+/**
+ * Deinitialize token.
+ * @function deinit
+ * @param {deinitCallback} callback - the callback that handles the response.
+ */
+ /**
+ * @callback deinitCallback
+ * @param {number}  error - status of operation, EXIT_CODE_ACCEPT (0) means success
+ */
+TProEccAPI.prototype.deinit = function(callback)
+{
+	var app = this.DEINIT_APP;
+    this.c.doConnect(app, callback);
+}
+/**
+ * Change user PIN.
+ * @function changePin
+ * @param {Object}  param - input parameters
+ * @param {string}  param.oldpin - actual pin
+ * @param {string}  param.newpin - new pin to set
+ * @param {changePinCallback} cb - The callback that handles the response.
+ *
+ * @example
+ * var api = require('TProEccSimpleAPI');
+ * var TProEccAPI = new api();
+ * var param = {};
+ * param.oldPin = $('#oldpin').val();
+ * param.newPin = $('#newpin').val();
+ * TProEccAPI.changePin(param, function(err, data) {
+ *   if(err === null) alert (JSON.stringify(data); else alert( "error:"+err.desc+" ("+err.err+")");
+ * });
+ */
+/**
+ * @callback changePinCallback
+ * @param {number}  error - status of operation, null means success
+ */
+TProEccAPI.prototype.changePin = function(param, callback) 
+{
+    var app = this.CHANGE_PIN_APP;
+    var oldPinHex = this.u.stringToHex(param.oldPin);
+    var newPinHex = this.u.stringToHex(param.newPin);
+    app = this.u.replaceRes( app,  this.OLD_PIN_APP_REPLACE_STRING, oldPinHex );
+    app = this.u.replaceRes( app,  this.NEW_PIN_APP_REPLACE_STRING, newPinHex );
+    this.c.doConnect(app, callback);
+};
+/**
+ * Return information about the token.
+ * @function getTokenInfo
+ * @param {getTokenInfoCallback} cb - The callback that handles the response.
+ *
+ * @example
+ * //return {"init":true,"keyc":1,"pinmin":4,"pinmax":4,"pin":3,"puk":-1,"sn":"0123039C10588732EE","fw":"1.0.35","pub":"0485de6a646383d5aebb96089663ad244ad88a9d0fea8427c814dea8afd1e0db66e67d666b285456435228b5f7282546f922fbd036232a0de5e9943a5960610d4b","pop":{"pd":"0000000123039c10588732ee3a5e4a52de4ddc9e4014d9f39330e2a784be82183621b217c81e769f8eb9ef3f","sgn":"304402205fc08cf710dc3a0fb6293946641795d1a0ef048ee65734b1f92549e0f3795ded022023df93d3bbf63fd9c6c9f3c34cdaff8dcab40a386e0d5236c2753ccdad5ef85c0000"}}
+ * var TProEccSimpleAPIInstance = new TProEccSimpleAPI();
+ * TProEccSimpleAPIInstance.getTokenInfo(param, function(errorCode, data) {
+ *   if(errorCode === EXIT_CODE_ACCEPT) alert (JSON.stringify(data); else alert( "error:"+errorCode)
+ * });
+ */
+/**
+ * @callback getTokenInfoCallback
+ * @param {number}  error - status of operation, null means success
+ * @param {Object}  data - information about token
+ * @param {boolean} data.init - token is initalized (true/false)
+ * @param {number}  data.pin - pin tries left
+ * @param {number}  data.puk - puk tries left, 0xff mean puk not set
+ * @param {number}  data.pinmin - min pin lenght
+ * @param {number}  data.pinmax - max pin lenght
+ * @param {string}  data.sn - token serial number
+ * @param {string}  data.fw - firmware version
+ * @param {string}  data.pub - hex representation of the public key
+ * @param {Object}  data.pop - POP (proof of possesion) data
+ * @param {string}  data.pop.pd - hex representation of  POP data
+ * @param {string}  data.pop.sdn - hex representation of POP signature
+ *
+ */
+TProEccSimpleAPI.prototype.getTokenInfo = function(callback)
+{
+	var app = this.GET_TOKEN_INFO_APP;
+    this.c.doConnect(app, callback);
+}
+/**
+ * Unblock PIN using PUK code.
+ * @function unblockPin
+ * @param {Object}  param - input parameters
+ * @param {string}  param.puk - puk provided by user
+ * @param {string}  param.pin - pin provided by user
+ * @param {unblockPinCallback} callback - the callback that handles the response.
+ */
+ /**
+ * @callback unblockPinCallback
+ * @param {number}  error - status of operation, EXIT_CODE_ACCEPT (0) means success
+ */
+TProEccAPI.prototype.unblockPin = function(param, callback)
+{
+    var app = this.UNBLOCK_PIN_APP;
+    var pukHex = param.puk;
+    var pinHex = this.u.stringToHex(param.pin);
+    app = this.u.replaceRes( app,  this.PUK_APP_REPLACE_STRING, pukHex );
+    app = this.u.replaceRes( app,  this.PIN_APP_REPLACE_STRING, pinHex );
+    this.c.doConnect(app, callback);
+}
+/**
+ * Generate new public key-pair.
+ * @function generateKey
+ * @param {Object}  param - input parameters
+ * @param {string}  param.pin - pin provided by user
+ * @param {string}  param.name - key name provided by user
+ * @param {generateKeyCallback} callback - the callback that handles the response.
+ */
+/**
+ * @callback generateKeyCallback
+ * @param {number}  error - status of operation, EXIT_CODE_ACCEPT (0) means success
+ * @param {Object}  data - output
+ * @param {string}  data.pub - hex representation of the public key
+ * @param {Object}  data.pop - POP (proof of possesion) data
+ * @param {string}  data.pop.pd - hex representation of  POP data
+ * @param {string}  data.pop.sdn - hex representation of POP signature
+ */
+TProEccAPI.prototype.generateKey = function(param, callback)
+{
+    var app = this.GENERATE_KEY_APP;
+    var pinHex = this.u.stringToHex(param.pin);
+    var nameHex = this.u.stringToHex(param.name);
+    app = this.u.replaceRes( app,  this.KEY_NAME_APP_REPLACE_STRING, nameHex );
+    app = this.u.replaceRes( app,  this.PIN_APP_REPLACE_STRING, pinHex );
+    this.c.doConnect(app, callback);
+}
+/**
+ * Delete key stored on the token.
+ * @function deleteKey
+ * @param {Object}  param - input parameters
+ * @param {string}  param.pin - pin provided by user
+ * @param {string}  param.pubKey - public key provided by user
+ * @param {deleteKeyCallback} callback - the callback that handles the response.
+ */
+/**
+ * @callback deleteKeyCallback
+ * @param {number}  error - status of operation, EXIT_CODE_ACCEPT (0) means success
+ */
+TProEccAPI.prototype.deleteKey = function(param, callback)
+{
+    var app = this.DELETE_KEY_APP;
+    var pinHex = this.u.stringToHex(param.pin);
+    var keyHex = param.pubKey;
+    app = this.u.replaceRes( app,  this.KEY_APP_REPLACE_STRING, keyHex );
+    app = this.u.replaceRes( app,  this.PIN_APP_REPLACE_STRING, pinHex );
+    this.c.doConnect(app, callback);
+}
+/**
+ * Get public key stored on the token.
+ * @function getPubKey
+ * @param {string}  param - slot ID provided by user
+ * @param {getPubKeyCallback} callback - the callback that handles the response.
+ */
+/**
+ * @callback getPubKeyCallback
+ * @param {number}  error - status of operation, EXIT_CODE_ACCEPT (0) means success
+ * @param {Object}  data - output
+ * @param {string}  data.pub - hex representation of the public key
+ * @param {number}  data.id - slot ID (0xFF if key is not present)
+ * @param {string}  data.name - key name
+ */
+TProEccAPI.prototype.getPubKey = function(param, callback)
+{
+    var app = this.GET_PUB_KEY_APP;
+    var idHex = this.u.decToHex(parseInt(param));
+    app = this.u.replaceRes( app,  this.SLOT_ID_REPLACE_STRING, idHex );
+    this.c.doConnect(app, callback);
+}
+/**
+ * Sign with SHA256 digest.
+ * @function sign
+ * @param {Object}  param - input parameters
+ * @param {string}  param.pin - pin provided by user
+ * @param {string}  param.hash - hex representation of SHA256 digest
+ * @param {string}  param.pubKey - hex representation of the public key provided by user
+ * @param {signCallback} cb - The callback that handles the response.
+*/
+/**
+ * @callback signCallback
+ * @param {number}  error - status of operation, EXIT_CODE_ACCEPT (0) means success
+ * @param {Object}  data - output
+ * @param {string}  data.sgn - hex representation of the signature
+ */
+TProEccAPI.prototype.sign = function(param, callback)
+{
+	var app = this.SIGN_APP;
+    var pinHex = this.u.stringToHex(param.pin);
+    var hashHex = param.dgst;
+    var keyHex = param.pubKey;
+    app = this.u.replaceRes( app,  this.HASH_APP_REPLACE_STRING, hashHex );
+    app = this.u.replaceRes( app,  this.KEY_APP_REPLACE_STRING, keyHex );
+    app = this.u.replaceRes( app,  this.PIN_APP_REPLACE_STRING, pinHex );
+    this.c.doConnect(app, callback);
+}
+/**
+ * Get PUK code stored on the token.
+ * @function getPuk
+ * @param {string}  param - pin provided by user
+ * @param {getPukCallback} callback - the callback that handles the response.
+ */
+ /**
+ * @callback getPukCallback
+ * @param {number}  error - status of operation, EXIT_CODE_ACCEPT (0) means success
+ * @param {Object}  data - output
+ * @param {string}  data.puk - hex representation of the puk
+ */
+TProEccAPI.prototype.getPuk = function(param, callback)
+{
+    var app = this.GET_PUK_APP;
+    var pinHex = this.u.stringToHex(param);
+    app = this.u.replaceRes( app,  this.PIN_APP_REPLACE_STRING, pinHex );
+    this.c.doConnect(app, callback);
+}
+/**
+ * Write certificate to be stored on the token.
+ * @function writeCertificate
+ * @param {Object}  param - input parameters
+ * @param {string}  param.cert - certificateprovided by user
+ * @param {string}  param.pubKey - public key provided by user
+ * @param {writeCertificateCallback} callback - the callback that handles the response.
+ */
+/**
+ * @callback writeCertificateCallback
+ * @param {number}  error - status of operation, EXIT_CODE_ACCEPT (0) means success
+ */
+TProEccAPI.prototype.writeCertificate = function(param, callback)
+{
+  var app = this.UPDATE_CERT_APP;
+  var certHex = param.cert;
+  var keyHex = param.pubKey;
+  app = this.u.replaceRes(app, this.UPDATE_CERT_APP_CERT_REPLACE_STRING, certHex );
+  app = this.u.replaceRes(app, this.UPDATE_CERT_APP_CERT_LENGTH_REPLACE_STRING, this.u.decToHex(certHex.length/2) );
+  app = this.u.replaceRes(app, this.UPDATE_CERT_APP_KEY_REPLACE_STRING, keyHex );
+  this.c.doConnect(app, callback);
+}
+/**
+ * Get certificate stored on the token.
+ * @function getCert
+ * @param {string}  param - slot ID provided by user
+ * @param {getCertCallback} callback - the callback that handles the response.
+ */
+/**
+ * @callback getPubKeyCallback
+ * @param {number}  error - status of operation, EXIT_CODE_ACCEPT (0) means success
+ * @param {Object}  data - output
+ * @param {string}  data.cert - hex representation of the certificate
+ * @param {number}  data.id - slot ID (0xFF if key is not present)
+ */
+TProEccAPI.prototype.getCert = function(param, callback)
+{
+    var app = this.GET_CERT_BY_SLOT_APP;
+    var idHex = this.u.decToHex(parseInt(param));
+    app = this.u.replaceRes(app, this.GET_CERT_BY_SLOT_APP_REPLACE_STRING, idHex );
+    this.c.doConnect(app, callback);
+}
+module.exports = TProEccAPI;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="errorCodes.html">errorCodes</a></li><li><a href="TProEccAPI.html">TProEccAPI</a></li></ul><h3>Global</h3><ul><li><a href="global.html#changePin">changePin</a></li><li><a href="global.html#deinit">deinit</a></li><li><a href="global.html#deleteKey">deleteKey</a></li><li><a href="global.html#generateKey">generateKey</a></li><li><a href="global.html#getCert">getCert</a></li><li><a href="global.html#getPubKey">getPubKey</a></li><li><a href="global.html#getPuk">getPuk</a></li><li><a href="global.html#getTokenInfo">getTokenInfo</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#sign">sign</a></li><li><a href="global.html#unblockPin">unblockPin</a></li><li><a href="global.html#writeCertificate">writeCertificate</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Fri Jan 27 2017 11:03:27 GMT+0100 (Środkowoeuropejski czas stand.)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

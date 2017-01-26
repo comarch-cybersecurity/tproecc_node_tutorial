@@ -1,0 +1,262 @@
+<!DOCTYPE HTML>
+<html lang="pl-PL">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Lesson 03 - web session authentication</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+	<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+	<script src="tproecc_client/tProEccClientAPI.js"></script>
+	<script src="shared_libs/tutorialUtils.js"></script>
+	<style>
+		.prettyprint ol.linenums>li {
+			list-style-type: decimal;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="row">
+		<div class="col s6 offset-s3">
+			<h1>Lesson 03</h1>
+			</div>
+	</div>
+
+
+
+	<!--
+	   getTokenInfo()
+	-->
+	<div class="row">
+
+		<div class="col s6 offset-s3">
+			<div class="card grey lighten-3">
+				<div class="card-content black-text">
+					<h4>getTokenInfo</h4>
+					<p>This function should be called <b>before</b> any other functions and is used to obtain information regarding current state of the token (initialization status, existing publickey, pin status). Now we are expecting, status of the token to be initialized
+						with generated key pair.</p>
+					<div class="card-action">
+						<a class="btn" id="buttonGetTokenInfo" modal>getTokenInfo</a>
+						<a onclick="showCode(getTokenInfo);" class="waves-effect waves-light btn modal-trigger">Show Code</a>
+						<a class="btn" href="/doc/global.html#getTokenInfo" target="_blank">doc</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<!--
+		  GET /getAuthToken/{userId}
+	  -->
+		<div id="getAuthToken" class="row">
+			<div class="col s6 offset-s3">
+				<div class="card grey lighten-3">
+					<div class="card-content black-text">
+						<h4>GET /getAuthToken/{userId}</h4>
+						<p>Call to server side rest api - getting authentication token for session</p>
+						<div class="card-action">
+							<div class="row">
+								<div class="input-field col s12">
+									<input id="userNameText" type="text" class="validate">
+									<label for="userNameText">User Name:</label>
+								</div>
+							</div>
+							<a class="btn" id="buttonGetAuthToken" modal>GET /getAuthToken...</a>
+							<a onclick="showCode(getAuthToken);" class="waves-effect waves-light btn modal-trigger">Show Code</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<!--
+		   sign digestMessage(message)
+		-->
+		<div id="signAuthToken" class="row">
+			<div class="col s6 offset-s3">
+				<div class="card grey lighten-3">
+					<div class="card-content black-text">
+						<h4>sign</h4>
+						<p>sign uses TProEcc token to generate ECDSA (Elipptic Curves Digital Signature Algoritm) signature. This time signature capability is used to comfirm (sign) authentication token.
+       Input pin protecting access to the token. Pin was defined in Tutorial01 in init operation.</p>
+						<div class="card-action">
+							<div class="row">
+								<div class="input-field col s12">
+									<input id="pin" type="text">
+									<label for="pin">PIN </label>
+								</div>
+							</div>
+							<a class="btn" id="buttonSign" modal>Sign</a>
+							<a onclick="showCode(sign);" class="waves-effect waves-light btn modal-trigger">Show Code</a>
+							<a class="btn" href="/doc/global.html#sign" target="_blank">doc</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--
+		  GET /getAuthToken/{userId}
+	  -->
+		<div id="doAuth" class="row">
+			<div class="col s6 offset-s3">
+				<div class="card grey lighten-3">
+					<div class="card-content black-text">
+						<h4>GET /doAuth/{signedAuthToken}</h4>
+						<p>Call to server side rest api - sending signed auth token....</p>
+						<div class="card-action">
+
+							<a class="btn" id="buttonDoAuth" modal>GET /doAuth...</a>
+							<a onclick="showCode(doAuth);" class="waves-effect waves-light btn modal-trigger">Show Code</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--
+		GET /restrictedCall
+	-->
+	<div id="restrictedCall" class="row">
+		<div class="col s6 offset-s3">
+			<div class="card grey lighten-3">
+				<div class="card-content black-text">
+					<h4>GET /restrictedCall</h4>
+					<p>Call to server side rest api - invocation of restricted API, which requires authentication.</p>
+					<div class="card-action">
+						<a class="btn" id="buttonRestrictedCall" modal>GET /restrictedCall...</a>
+						<a onclick="showCode(restrictedCall);" class="waves-effect waves-light btn modal-trigger">Show Code</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div id="dialogs"></div>
+
+</body>
+
+<script>
+	// load dialogs from dialogs.html
+	$("#dialogs").load("dialogs.html");
+	var api = require('TProEccSimpleAPI');
+	var TProEccAPI = new api();
+  var authToken;
+	var signedAuthToken;
+
+	$("#getAuthToken").hide();
+	$("#signAuthToken").hide();
+	$("#doAuth").hide();
+	//$("#restrictedCall").hide();
+
+	/***
+	 getTokenInfo
+	 ***/
+
+	$("#buttonGetTokenInfo").click(getTokenInfo);
+
+	function getTokenInfo() {
+		//showWait(); // [DEMO] show token waiting animation
+		//var timeoutSec = 10; // device connection timeout=10sec
+
+		TProEccAPI.getTokenInfo(function(error, data) {
+			//hideWait(); // [DEMO] hides wait windows
+			if (error === null) {
+				showDialogJSON("getTokenInfo", data);
+				$("#getAuthToken").show(); // [DEMO] // shows
+			} else {
+				showDialogError("getTokenInfo", error.desc + " (" + error.err + ")");
+			}
+		});
+	}
+
+	/***
+	 getAuthToken
+	 ***/
+
+	$('#buttonGetAuthToken').click(getAuthToken);
+
+	function getAuthToken() {
+		// [DEMO-START]
+		if ($('#userNameText').val() === "") {
+			showDialogWarn("User Name is empty");
+			return;
+		}
+		// [DEMO-END]
+		var url = "/getAuthToken/" + $('#userNameText').val();
+		$.get(url, function(data) {
+				showDialogInfo("GET /getAuthToken...", data);
+				authToken = data;
+				$("#signAuthToken").show(); // [DEMO] // shows
+			})
+			.fail(function(jqXHR) {
+				showDialogError("GET /getAuthToken...", jqXHR.responseText);
+			});
+	}
+
+
+	$("#buttonSign").click(sign);
+
+	function sign() {
+		// [DEMO-START]
+		if ($('#pin').val() === "") {
+			showDialogWarn("pin is empty");
+			return;
+		}
+		showPushPutton();
+		// [DEMO-END]
+		var param = {};
+		param.pin = $('#pin').val();
+		param.dgst = TProEccAPI.dgst(authToken);
+		TProEccAPI.sign(param, function(error, data) {
+			hidePushPutton(); // [DEMO] hide push button animation
+			if (error === null) {
+				showDialogJSON("sign", data);
+				signedAuthToken = data.sgn; // signature assigned to variable signature
+				$("#doAuth").show(); // [DEMO] show verifyDigest card
+			} else {
+				showDialogError("sign", error.desc + " (" + error.err + ")");
+			}
+		});
+	}
+
+	/***
+	 doAuth
+	 ***/
+	$('#buttonDoAuth').click(doAuth);
+
+	function doAuth() {
+		//var signedAuthToken = authToken;
+		var url = "/doAuth/" + signedAuthToken;
+		$.get(url, function(data) {
+				showDialogInfo("GET /doAuth...", data);
+			})
+			.fail(function(jqXHR) {
+				showDialogError("GET /doAuth...", jqXHR.responseText);
+			});
+	}
+
+	/***
+	 getTokenInfo
+	 ***/
+	$('#buttonRestrictedCall').click(restrictedCall);
+
+	function restrictedCall() {
+		var url = "/restrictedCall";
+		$.get(url, function(data) {
+				showDialogInfo("GET /restrictedCall...", data);
+			})
+			.fail(function(jqXHR) {
+				showDialogError("GET /restrictedCall...", jqXHR.responseText);
+			});
+	}
+
+
+</script>
+
+</html>

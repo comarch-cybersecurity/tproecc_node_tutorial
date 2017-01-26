@@ -1,0 +1,14 @@
+stages:
+    - upload
+
+upload:
+    stage: upload
+    only:
+        - master
+    except:
+        - tag
+    script:
+        - git remote add github https://%GITHUB_USER%:%GITHUB_TOKEN%@github.com/comarch-cybersecurity/tproecc_node_tutorial.git
+        - git config --local user.email "biodgit@comarch.pl"
+        - git config --local user.name "BiodGit"
+        - git push github master
