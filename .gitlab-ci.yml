@@ -13,3 +13,6 @@ upload:
         - git remote add github https://%GITHUB_USER%:%GITHUB_TOKEN%@github.com/comarch-cybersecurity/tproecc_node_tutorial.git
         - git push github master
         - git remote remove github
+    tags:
+        - node.js
+        - embedded
