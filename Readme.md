@@ -4,6 +4,8 @@ code version 0.0.94
 > This project is dedicated for TProEcc device owners. If you don't posses TProEcc value of presented subjects will be very limited for you.
 
 TProEcc is a cryptographical device based on Elliptic Curves Cryptography. If you want to know a little bit more about availability of the device and its features please refer to: http://tpro.comarch.com/.
+Moreover, in order to gain basic intel onto accessing token's functionalities, please refer to [User's Guide](https://github.com/comarch-cybersecurity/tproecc_node_tutorial/tree/master/public_html/documentation). 
+
 
 TProEcc tutorial is provided to gradually improve your understanding regarding TProEcc Token functionality and how to embed it into your own web application.
 
@@ -76,12 +78,16 @@ Node.js tutorial module relies on the following dependencies as defined in **pac
 
 ### Directories
 ```sh
-├───public_html           -- client side files (http, js, styles, docs)
-│   ├───doc               -- contains documentation files
-│   ├───imgs              -- images
-│   └───tproecc_client    -- browser module used to communicate with tProEcc device
-├───shared_libs           -- shared libraries used by node server side lessons
-└───users.db              -- users database
+├───public_html                 -- client side files (http, js, styles, docs)
+│   ├───documentation           -- contains "User's guide" for tPro Ecc in .pdf format
+│   ├───doc_Client              -- contains documentation files for client API
+│   ├───doc_Client_Simple       -- contains documentation files for simplified client API
+│   ├───doc_Client_Server       -- contains documentation files for server API
+│   ├───imgs                    -- images
+│   ├───tproecc_client          -- browser module used to communicate with tProEcc device
+│   └───tproecc_client_simple   -- simplified browser module used to communicate with tProEcc device
+├───shared_libs                 -- shared libraries used by node server side lessons
+└───users.db                    -- users database
 ```
 
 ## Contact
