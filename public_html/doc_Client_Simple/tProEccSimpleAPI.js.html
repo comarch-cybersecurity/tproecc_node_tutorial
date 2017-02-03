@@ -26,84 +26,106 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>'use strict';
-
-/**
-	* @file Simplified Web Browser API, which provides methods to interact with tPro Ecc token in order to:
-	* &lt;br> - initialize the device,
-	* &lt;br> - create digital signature of delivered content,
-	* &lt;br> - change PIN,
-	* &lt;br> - obtaining detailed information about token's state.
-*/
-
-/** @class 
-	* @classdesc Methods, which this class provides, are dedicated for communicating with tPro Ecc in order to perform cryptographic operations. It is dedicated to be used in any custom web application.
-*/
+            <pre class="prettyprint source linenums"><code>  "use strict";
+/** @class */
 function TProEccSimpleAPI() {
     this.PIN_APP_REPLACE_STRING = "3131313100";
     this.KEY_APP_REPLACE_STRING = "3333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333300";
     this.HASH_APP_REPLACE_STRING = "343434343434343434343434343434343434343434343434343434343434343400";
     this.OLD_PIN_APP_REPLACE_STRING = "3535353500";
-    this.NEW_PIN_APP_REPLACE_STRING = "3636363600";                                                                                                                                
-    this.SIGN_APP="C6C74E412BEFBD3AB5FFD399702CD233B41CB9873F6BCA668171EB7695C0F3AECC126A3C3943336651A5F678523D6292722C4BB1D4DBF23E193934ABC4111E270028002600C8020300FE01FE03FE040000000401040000052006080180081F800A00000096641000268631313131003434343434343434343434343434343434343434343434343434343434343434000A0202020202";
-    this.GET_TOKEN_INFO_APP = "98FB80E5466D18A5E5009B4BAD656C7C0DFFF1F06705F6EA2B22B258D7843C16825BF6F340760D230AC3C6B772B540B834FDEDA3230B784CC5A65B7CBD73BE13001200100000020200FE01FE081C800A00008001";
-    this.INIT_APP = "71363A818DD877F643EC0CAC2AF63C526B4916C5F668E818408A30713EC90205D50C5FE158B8508849AEA5D5793883E950FD6C57F927F94A57C7859839FF68C4002E002C0000020200FE01FE040000000401040000050809080180080B80081E800A000000966411000D866400000000313131310044656661756C740002020202020A";
-    this.UNBLOCK_PIN_APP = "4C60BF0855696788DAE959B38C36349F5E7838732D7607E9E1129B9305CEEB296D260E7687A29FE3AC442F51B011C16353AB462079964E28C58B16B293FFF66A0030002E00C8020300FE01FE03FE0400000008010400000904030801800804800803800A0000009664010000006410000E8232323232323232320031313131000505";
-    this.CHANGE_PIN_APP = "C6E8E2585D8E74ECAE16F0E1EB14E93DBA53B6FCCF96FAB48EE0C191C4FE0E803504698DD84848C1820DCF4C26C29FCC11AF3F16FBC89DA7F14CA9D4F02E54080030002E00C8020300FE01FE03FE0400000004010400000504030801800804800809800A0000009664000000006411000A82353535350036363636000505";
+    this.NEW_PIN_APP_REPLACE_STRING = "3636363600";
+                                                                                                                                //this.SIGN_APP = "0028002600C8020300FE01FE03FE040000000401040000052006080180081F800A00000096641000268631313131003434343434343434343434343434343434343434343434343434343434343434000A0202020202";
+    this.SIGN_APP="AD5DA3D40B1D31270703F220BB5342C825001E9284B182ECAD2B9DC51E125181F30398F6DB9F4E380A90B53CB7C1F90AF42F9BD93E4C42D7F721DA12B3FDDEB20028002600C8020300FE01FE03FE0400000604010400000B2006080180081F800A0000009664100000860A020202020231313131003434343434343434343434343434343434343434343434343434343434343434000006";
+     //this.SIGN_APP ="0028002600C8020300FE01FE03FE0400000004010400000520060801800821800A00000096641000268631313131003434343434343434343434343434343434343434343434343434343434343434000A0202020202";
+    this.GET_TOKEN_INFO_APP = "98FB80E5466D18A5E5009B4BAD656C7C0DFFF1F06705F6EA2B22B258D7843C16825BF6F340760D230AC3C6B772B540B834FDEDA3230B784CC5A65B7CBD73BE13001200100000020200FE01FE081C800A000080010000";
+    this.INIT_APP = "616D464CCE24A15D1A1F54A4B8B0EFE429818F87CF3C2FC6A1C567973271C4FA0CE5D5525139CDB5677C1FCB224BA3D7D3DEDF477ED46E8D1E02B7DA1674BA8A002E002C0000020200FE01FE0400000604010400000B0809080180080B80081E800A000000966411000086640000000002020202020A313131310044656661756C74000006";
+    this.UNBLOCK_PIN_APP = "8D2ECF619B9FE145D483836EE6716FA8DBFC50DE576E67AF9C421A37A5587838E8B8B8FDAA8AC1F548B9D98DBB065BA39F286529B67938BFCDC27791BCA324A80030002E00C8020300FE01FE03FE0400000208010400000B04030801800804800803800A0000009664010000006410000082050532323232323232320031313131000002";
+    this.CHANGE_PIN_APP = "273267F321E65C22CA406B0E5AD503753AD595DB1FBED35C085AFD821247ACE9131BF9C7292CEEC2B92C8CDD3B9264E6634436B20332B5151D7772CA059641890030002E00C8020300FE01FE03FE0400000204010400000704030801800804800809800A00000096640000000064110000820505353535350036363636000002";
+
 	var communication = require("./helpers/ws.js");
 	this.c = new communication();
+
 	var utils = require("./helpers/functions.js");
 	this.u = new utils();
+
 	var err = require("./helpers/errorCodes.js");
+	/**
+	 *  @member {errorCodes} e
+	 *  class with error codes
+	 */
 	this.e = new err();
+
 }
+
+
+
+// /*
+//  * wait for token insertion and returns informations about the token
+//  * @function getTokenInfo
+//  * @param {Number} timeout - timeout
+//  * @param {getTokenInfoCallback} cb - The callback that handles the response.
+//  *
+//  * @example
+//  * return {"init":true,"keyc":1,"pinmin":4,"pinmax":4,"pin":3,"puk":-1,"sn":"0123039C10588732EE","fw":"1.0.35","pub":"0485de6a646383d5aebb96089663ad244ad88a9d0fea8427c814dea8afd1e0db66e67d666b285456435228b5f7282546f922fbd036232a0de5e9943a5960610d4b","pop":{"pd":"0000000123039c10588732ee3a5e4a52de4ddc9e4014d9f39330e2a784be82183621b217c81e769f8eb9ef3f","sgn":"304402205fc08cf710dc3a0fb6293946641795d1a0ef048ee65734b1f92549e0f3795ded022023df93d3bbf63fd9c6c9f3c34cdaff8dcab40a386e0d5236c2753ccdad5ef85c0000"}}
+//  * var TProEccSimpleAPIInstance = new TProEccSimpleAPI();
+//  * TProEccSimpleAPIInstance.getTokenInfo(10, function(errorCode, data) {
+//  *   if(errorCode === EXIT_CODE_ACCEPT) alert (JSON.stringify(data); else alert( "error:"+errorCode)
+//  * });
+//  */
+//
+// /*
+//  * @callback getTokenInfoCallback
+//  * @param {number}  error - status of operation, null means success
+//  * @param {Object}  data - information about token
+//  * @param {boolean} data.init - token is initalized (true/false)
+//  * @param {number}  data.pin - pin tries left
+//  * @param {number}  data.puk - puk tries left, 0xff mean puk not set
+//  * @param {number}  data.pinmin - min pin lenght
+//  * @param {number}  data.pinmax - max pin lenght
+//  * @param {string}  data.sn - token serial number
+//  * @param {string}  data.fw - firmware version
+//  * @param {string}  data.pub - hex representation of the public key
+//  * @param {Object}  data.pop - POP (proof of possesion) data
+//  * @param {string}  data.pop.pd - hex representation of  POP data
+//  * @param {string}  data.pop.sdn - hex representation of POP signature
+//  *
+// */
+// TProEccSimpleAPI.prototype.getTokenInfoT = function(timeout, callback, ref)
+// {
+//
+// 	var tmp;
+// 	if( ref !== undefined ) {
+// 		tmp = ref;
+// 	} else {
+// 		tmp = this;
+// 		timeout = timeout;
+// 	}
+// 	var app = tmp.GET_TOKEN_INFO_APP;
+//
+//     tmp.c.doConnect(app, function(error, data){
+// 		if(error !== null &amp;&amp; error.err === tmp.e.EXIT_CODE_CONNECTION_ERROR &amp;&amp; timeout > 0 ) {
+// 			setTimeout( tmp.getTokenInfoT, 2000, timeout-1, callback, tmp );
+// 		} else {
+// 			callback(error, data);
+// 		}
+// 	} );
+// };
+
+
 /**
- * Return information about the token.
+ * returns informations about the token
  * @function getTokenInfo
  * @param {getTokenInfoCallback} cb - The callback that handles the response.
  *
  * @example
- * //return {"init":true,"keyc":1,"pinmin":4,"pinmax":4,"pin":3,"puk":-1,"sn":"0123039C10588732EE","fw":"1.0.35","pub":"0485de6a646383d5aebb96089663ad244ad88a9d0fea8427c814dea8afd1e0db66e67d666b285456435228b5f7282546f922fbd036232a0de5e9943a5960610d4b","pop":{"pd":"0000000123039c10588732ee3a5e4a52de4ddc9e4014d9f39330e2a784be82183621b217c81e769f8eb9ef3f","sgn":"304402205fc08cf710dc3a0fb6293946641795d1a0ef048ee65734b1f92549e0f3795ded022023df93d3bbf63fd9c6c9f3c34cdaff8dcab40a386e0d5236c2753ccdad5ef85c0000"}}
- * var TProEccSimpleAPIInstance = new TProEccSimpleAPI();
- * TProEccSimpleAPIInstance.getTokenInfo(param, function(errorCode, data) {
- *   if(errorCode === EXIT_CODE_ACCEPT) alert (JSON.stringify(data); else alert( "error:"+errorCode)
+ * //return {"init":true,"keyc":1,"pinmin":4,"pinmax":4,"pin":2,"puk":-1,"sn":"012362B86F619F5DEE","fw":"1.0.35","pub":"04aa3264070822eac747ee63d00ee9547e8e773775ca8fe3a3ce8624caff23bf0f94a3048490e65ff5e5b994904286a0b66e075d55f300f5f2d19fdbb1743f0884","pop":{"pd":"000000012362b86f619f5dee6055e78f8c6719951fa69cbdb1704faa802d288f85ec68780f991b338dcd2f3b","sgn":"304602210099aa2d1f941049c08afa375e018468285ed79b33c13830f2ab597a250f717268022100bc97a0aa23234259a89081504086d5af1474b00ec1436156c4a5631e9b91db74"}}
+ * var api = require('TProEccSimpleAPI');
+ * var TProEccAPI = new api();
+ * TProEccAPI.getTokenInfo(function(err, data) {
+ *   if(err === null) alert (JSON.stringify(data); else alert( "error:"+err.desc+" ("+err.err+")");
  * });
  */
-/**
- * @callback getTokenInfoCallback
- * @param {number}  error - status of operation, null means success
- * @param {Object}  data - information about token
- * @param {boolean} data.init - token is initalized (true/false)
- * @param {number}  data.pin - pin tries left
- * @param {number}  data.puk - puk tries left, 0xff mean puk not set
- * @param {number}  data.pinmin - min pin lenght
- * @param {number}  data.pinmax - max pin lenght
- * @param {string}  data.sn - token serial number
- * @param {string}  data.fw - firmware version
- * @param {string}  data.pub - hex representation of the public key
- * @param {Object}  data.pop - POP (proof of possesion) data
- * @param {string}  data.pop.pd - hex representation of  POP data
- * @param {string}  data.pop.sdn - hex representation of POP signature
- *
- */
-TProEccSimpleAPI.prototype.getTokenInfo = function(callback)
-{
-	var app = this.GET_TOKEN_INFO_APP;
-    this.c.doConnect(app, callback);
-}
- /*
- * Wait for token insertion and return information about the token.
- * @function getTokenInfo
- * @param {Number} timeout - timeout
- * @param {getTokenInfoCallback} cb - The callback that handles the response.
- *
- * @example
- * return {"init":true,"keyc":1,"pinmin":4,"pinmax":4,"pin":3,"puk":-1,"sn":"0123039C10588732EE","fw":"1.0.35","pub":"0485de6a646383d5aebb96089663ad244ad88a9d0fea8427c814dea8afd1e0db66e67d666b285456435228b5f7282546f922fbd036232a0de5e9943a5960610d4b","pop":{"pd":"0000000123039c10588732ee3a5e4a52de4ddc9e4014d9f39330e2a784be82183621b217c81e769f8eb9ef3f","sgn":"304402205fc08cf710dc3a0fb6293946641795d1a0ef048ee65734b1f92549e0f3795ded022023df93d3bbf63fd9c6c9f3c34cdaff8dcab40a386e0d5236c2753ccdad5ef85c0000"}}
- * var TProEccSimpleAPIInstance = new TProEccSimpleAPI();
- * TProEccSimpleAPIInstance.getTokenInfo(10, function(errorCode, data) {
- *   if(errorCode === EXIT_CODE_ACCEPT) alert (JSON.stringify(data); else alert( "error:"+errorCode)
- * });
- */
+
 /*
  * @callback getTokenInfoCallback
  * @param {number}  error - status of operation, null means success
@@ -121,26 +143,15 @@ TProEccSimpleAPI.prototype.getTokenInfo = function(callback)
  * @param {string}  data.pop.sdn - hex representation of POP signature
  *
 */
-TProEccSimpleAPI.prototype.getTokenInfo = function(timeout, callback, ref)
-{
-	var tmp;
-	if( ref !== undefined ) {
-		tmp = ref;
-	} else {
-		tmp = this;
-		timeout = timeout;
-	}
-	var app = tmp.GET_TOKEN_INFO_APP;
-    tmp.c.doConnect(app, function(error, data){
-		if(error !== null &amp;&amp; error.err === tmp.e.EXIT_CODE_CONNECTION_ERROR &amp;&amp; timeout > 0 ) {
-			setTimeout( tmp.getTokenInfoT, 2000, timeout-1, callback, tmp );
-		} else {
-			callback(error, data);
-		}
-	} );
+TProEccSimpleAPI.prototype.getTokenInfo = function(callback) {
+	var app = this.GET_TOKEN_INFO_APP;
+    this.c.doConnect(app, callback);
 };
+
+
+
 /**
- * Set PIN and generate key-pair.
+ * sets pin and generates key
  * @function init
  * @param {string}  param - pin provided by user
  * @param {initCallback} cb - The callback that handles the response.
@@ -153,6 +164,8 @@ TProEccSimpleAPI.prototype.getTokenInfo = function(timeout, callback, ref)
  *   if(err === null) alert (JSON.stringify(data); else alert( "error:"+err.desc+" ("+err.err+")");
  * });
  */
+
+
 /**
  * @callback initCallback
  * @param {number}  error - status of operation, null means success
@@ -162,15 +175,16 @@ TProEccSimpleAPI.prototype.getTokenInfo = function(timeout, callback, ref)
  * @param {string}  data.pop.pd - hex representation of  POP data
  * @param {string}  data.pop.sdn - hex representation of POP signature
  */
-TProEccSimpleAPI.prototype.init = function(param, callback) 
-{
+
+TProEccSimpleAPI.prototype.init = function(param, callback) {
     var app = this.INIT_APP;
     var pinHex = this.u.stringToHex(param);
     app = this.u.replaceRes(app, this.PIN_APP_REPLACE_STRING, pinHex );
     this.c.doConnect(app, callback);
 };
+
 /**
- * Sign input with SHA256 digest.
+ * signs SHA256 digest
  * @function sign
  * @param {Object}  param - input parameters
  * @param {string}  param.pin - pin provided by user
@@ -188,14 +202,14 @@ TProEccSimpleAPI.prototype.init = function(param, callback)
  *   if(err === null) alert (JSON.stringify(data); else alert( "error:"+err.desc+" ("+err.err+")");
  * });
  */
+
 /**
  * @callback signCallback
  * @param {number}  error - status of operation, null means success
  * @param {Object}  data - output
  * @param {string}  data.sgn - hex representation of the signature
  */
-TProEccSimpleAPI.prototype.sign = function(param, callback) 
-{
+TProEccSimpleAPI.prototype.sign = function(param, callback) {
 	var app = this.SIGN_APP;
     var pinHex = this.u.stringToHex(param.pin);
     var hashHex = param.dgst;
@@ -203,8 +217,9 @@ TProEccSimpleAPI.prototype.sign = function(param, callback)
     app = this.u.replaceRes( app,  this.PIN_APP_REPLACE_STRING, pinHex );
     this.c.doConnect(app, callback);
 };
+
 /**
- * Change user PIN.
+ * changes user pin
  * @function changePin
  * @param {Object}  param - input parameters
  * @param {string}  param.oldpin - actual pin
@@ -221,12 +236,14 @@ TProEccSimpleAPI.prototype.sign = function(param, callback)
  *   if(err === null) alert (JSON.stringify(data); else alert( "error:"+err.desc+" ("+err.err+")");
  * });
  */
+
 /**
  * @callback changePinCallback
  * @param {number}  error - status of operation, null means success
  */
-TProEccSimpleAPI.prototype.changePin = function(param, callback) 
-{
+
+
+TProEccSimpleAPI.prototype.changePin = function(param, callback) {
     var app = this.CHANGE_PIN_APP;
     var oldPinHex = this.u.stringToHex(param.oldPin);
     var newPinHex = this.u.stringToHex(param.newPin);
@@ -234,8 +251,9 @@ TProEccSimpleAPI.prototype.changePin = function(param, callback)
     app = this.u.replaceRes( app,  this.NEW_PIN_APP_REPLACE_STRING, newPinHex );
     this.c.doConnect(app, callback);
 };
+
 /**
- * Calculate SHA256 digest.
+ * calculate SHA256 digest
  * @function dgst
  * @param {string}  msg - message
  * @return hex representation of SHA256 digest
@@ -252,7 +270,8 @@ TProEccSimpleAPI.prototype.dgst = function(msg) {
 };
 
 /** TProEccSimpleAPI */
-module.exports = TProEccSimpleAPI;</code></pre>
+module.exports = TProEccSimpleAPI;
+</code></pre>
         </article>
     </section>
 
@@ -262,13 +281,13 @@ module.exports = TProEccSimpleAPI;</code></pre>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="errorCodes.html">errorCodes</a></li><li><a href="TProEccSimpleAPI.html">TProEccSimpleAPI</a></li></ul><h3>Global</h3><ul><li><a href="global.html#changePin">changePin</a></li><li><a href="global.html#dgst">dgst</a></li><li><a href="global.html#getTokenInfo">getTokenInfo</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#sign">sign</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="errorCodes.html">errorCodes</a></li><li><a href="TProEccSimpleAPI.html">TProEccSimpleAPI</a></li></ul><h3>Global</h3><ul><li><a href="global.html#changePin">changePin</a></li><li><a href="global.html#dgst">dgst</a></li><li><a href="global.html#e">e</a></li><li><a href="global.html#getTokenInfo">getTokenInfo</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#sign">sign</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Fri Jan 27 2017 15:16:00 GMT+0100 (Środkowoeuropejski czas stand.)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Fri Feb 03 2017 09:20:51 GMT+0100 (Środkowoeuropejski czas stand.)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -92,6 +92,82 @@
     
 
     
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="e"><span class="type-signature"></span>e<span class="type-signature"> :<a href="errorCodes.html">errorCodes</a></span></h4>
+
+
+
+
+<div class="description">
+    class with error codes
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type"><a href="errorCodes.html">errorCodes</a></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="tProEccSimpleAPI.js.html">tProEccSimpleAPI.js</a>, <a href="tProEccSimpleAPI.js.html#line24">line 24</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+    
 
     
         <h3 class="subsection-title">Methods</h3>
@@ -108,7 +184,7 @@
 
 
 <div class="description">
-    Change user PIN.
+    changes user pin
 </div>
 
 
@@ -296,7 +372,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tProEccSimpleAPI.js.html">tProEccSimpleAPI.js</a>, <a href="tProEccSimpleAPI.js.html#line178">line 178</a>
+        <a href="tProEccSimpleAPI.js.html">tProEccSimpleAPI.js</a>, <a href="tProEccSimpleAPI.js.html#line193">line 193</a>
     </li></ul></dd>
     
 
@@ -339,7 +415,7 @@
 
 
 <div class="description">
-    Calculate SHA256 digest.
+    calculate SHA256 digest
 </div>
 
 
@@ -432,7 +508,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tProEccSimpleAPI.js.html">tProEccSimpleAPI.js</a>, <a href="tProEccSimpleAPI.js.html#line209">line 209</a>
+        <a href="tProEccSimpleAPI.js.html">tProEccSimpleAPI.js</a>, <a href="tProEccSimpleAPI.js.html#line227">line 227</a>
     </li></ul></dd>
     
 
@@ -485,7 +561,7 @@
 
 
 <div class="description">
-    Return information about the token.
+    returns informations about the token
 </div>
 
 
@@ -527,7 +603,7 @@
             <td class="type">
             
                 
-<span class="param-type"><a href="global.html#getTokenInfoCallback">getTokenInfoCallback</a></span>
+<span class="param-type">getTokenInfoCallback</span>
 
 
             
@@ -578,7 +654,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tProEccSimpleAPI.js.html">tProEccSimpleAPI.js</a>, <a href="tProEccSimpleAPI.js.html#line32">line 32</a>
+        <a href="tProEccSimpleAPI.js.html">tProEccSimpleAPI.js</a>, <a href="tProEccSimpleAPI.js.html#line87">line 87</a>
     </li></ul></dd>
     
 
@@ -605,7 +681,7 @@
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>//return {"init":true,"keyc":1,"pinmin":4,"pinmax":4,"pin":3,"puk":-1,"sn":"0123039C10588732EE","fw":"1.0.35","pub":"0485de6a646383d5aebb96089663ad244ad88a9d0fea8427c814dea8afd1e0db66e67d666b285456435228b5f7282546f922fbd036232a0de5e9943a5960610d4b","pop":{"pd":"0000000123039c10588732ee3a5e4a52de4ddc9e4014d9f39330e2a784be82183621b217c81e769f8eb9ef3f","sgn":"304402205fc08cf710dc3a0fb6293946641795d1a0ef048ee65734b1f92549e0f3795ded022023df93d3bbf63fd9c6c9f3c34cdaff8dcab40a386e0d5236c2753ccdad5ef85c0000"}}var TProEccSimpleAPIInstance = new TProEccSimpleAPI();TProEccSimpleAPIInstance.getTokenInfo(param, function(errorCode, data) {  if(errorCode === EXIT_CODE_ACCEPT) alert (JSON.stringify(data); else alert( "error:"+errorCode)});</code></pre>
+    <pre class="prettyprint"><code>//return {"init":true,"keyc":1,"pinmin":4,"pinmax":4,"pin":2,"puk":-1,"sn":"012362B86F619F5DEE","fw":"1.0.35","pub":"04aa3264070822eac747ee63d00ee9547e8e773775ca8fe3a3ce8624caff23bf0f94a3048490e65ff5e5b994904286a0b66e075d55f300f5f2d19fdbb1743f0884","pop":{"pd":"000000012362b86f619f5dee6055e78f8c6719951fa69cbdb1704faa802d288f85ec68780f991b338dcd2f3b","sgn":"304602210099aa2d1f941049c08afa375e018468285ed79b33c13830f2ab597a250f717268022100bc97a0aa23234259a89081504086d5af1474b00ec1436156c4a5631e9b91db74"}}var api = require('TProEccSimpleAPI');var TProEccAPI = new api();TProEccAPI.getTokenInfo(function(err, data) {  if(err === null) alert (JSON.stringify(data); else alert( "error:"+err.desc+" ("+err.err+")");});</code></pre>
 
 
 
@@ -621,7 +697,7 @@
 
 
 <div class="description">
-    Set PIN and generate key-pair.
+    sets pin and generates key
 </div>
 
 
@@ -737,7 +813,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tProEccSimpleAPI.js.html">tProEccSimpleAPI.js</a>, <a href="tProEccSimpleAPI.js.html#line114">line 114</a>
+        <a href="tProEccSimpleAPI.js.html">tProEccSimpleAPI.js</a>, <a href="tProEccSimpleAPI.js.html#line125">line 125</a>
     </li></ul></dd>
     
 
@@ -780,7 +856,7 @@
 
 
 <div class="description">
-    Sign input with SHA256 digest.
+    signs SHA256 digest
 </div>
 
 
@@ -968,7 +1044,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tProEccSimpleAPI.js.html">tProEccSimpleAPI.js</a>, <a href="tProEccSimpleAPI.js.html#line144">line 144</a>
+        <a href="tProEccSimpleAPI.js.html">tProEccSimpleAPI.js</a>, <a href="tProEccSimpleAPI.js.html#line158">line 158</a>
     </li></ul></dd>
     
 
@@ -1106,462 +1182,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tProEccSimpleAPI.js.html">tProEccSimpleAPI.js</a>, <a href="tProEccSimpleAPI.js.html#line196">line 196</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            
-                
-
-    
-
-    <h4 class="name" id="getTokenInfoCallback"><span class="type-signature"></span>getTokenInfoCallback<span class="signature">(error, data)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>error</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">status of operation, null means success</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>data</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">information about token
-                <h6>Properties</h6>
-                
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>init</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">token is initalized (true/false)</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>pin</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">pin tries left</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>puk</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">puk tries left, 0xff mean puk not set</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>pinmin</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">min pin lenght</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>pinmax</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">max pin lenght</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>sn</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">token serial number</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>fw</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">firmware version</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>pub</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">hex representation of the public key</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>pop</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">POP (proof of possesion) data
-                <h6>Properties</h6>
-                
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>pd</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">hex representation of  POP data</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>sdn</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">hex representation of POP signature</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tProEccSimpleAPI.js.html">tProEccSimpleAPI.js</a>, <a href="tProEccSimpleAPI.js.html#line44">line 44</a>
+        <a href="tProEccSimpleAPI.js.html">tProEccSimpleAPI.js</a>, <a href="tProEccSimpleAPI.js.html#line212">line 212</a>
     </li></ul></dd>
     
 
@@ -1855,7 +1476,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tProEccSimpleAPI.js.html">tProEccSimpleAPI.js</a>, <a href="tProEccSimpleAPI.js.html#line128">line 128</a>
+        <a href="tProEccSimpleAPI.js.html">tProEccSimpleAPI.js</a>, <a href="tProEccSimpleAPI.js.html#line141">line 141</a>
     </li></ul></dd>
     
 
@@ -2054,7 +1675,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tProEccSimpleAPI.js.html">tProEccSimpleAPI.js</a>, <a href="tProEccSimpleAPI.js.html#line163">line 163</a>
+        <a href="tProEccSimpleAPI.js.html">tProEccSimpleAPI.js</a>, <a href="tProEccSimpleAPI.js.html#line178">line 178</a>
     </li></ul></dd>
     
 
@@ -2094,13 +1715,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="errorCodes.html">errorCodes</a></li><li><a href="TProEccSimpleAPI.html">TProEccSimpleAPI</a></li></ul><h3>Global</h3><ul><li><a href="global.html#changePin">changePin</a></li><li><a href="global.html#dgst">dgst</a></li><li><a href="global.html#getTokenInfo">getTokenInfo</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#sign">sign</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="errorCodes.html">errorCodes</a></li><li><a href="TProEccSimpleAPI.html">TProEccSimpleAPI</a></li></ul><h3>Global</h3><ul><li><a href="global.html#changePin">changePin</a></li><li><a href="global.html#dgst">dgst</a></li><li><a href="global.html#e">e</a></li><li><a href="global.html#getTokenInfo">getTokenInfo</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#sign">sign</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Fri Jan 27 2017 15:16:00 GMT+0100 (Środkowoeuropejski czas stand.)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Fri Feb 03 2017 09:20:51 GMT+0100 (Środkowoeuropejski czas stand.)
 </footer>
 
 <script> prettyPrint(); </script>
