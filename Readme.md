@@ -1,5 +1,5 @@
 # tProEcc Node.js Tutorial
-code version 0.0.94
+code version 1.0.94
 
 > This project is dedicated for TProEcc device owners. If you don't posses TProEcc value of presented subjects will be very limited for you.
 
@@ -72,7 +72,6 @@ Node.js tutorial module relies on the following dependencies as defined in **pac
 - [ExpressSession](https://www.npmjs.com/package/express-session) - add-on to ExpressJs, which simplifies session management, used in web page authentication lesson
 - [Tingodb](http://www.tingodb.com) - embeddable [MongoDB](http://www.mongodb.com) like NoSql database, used to store users' database with associated public keys
 - [Morgan](https://www.npmjs.com/package/morgan) - http request logger utility, usable for accounting web service activity
-- [Njwt](https://www.npmjs.com/package/njwt) - JWT - [Json Web Token](https://jwt.io/) library for Node.js, used to demonstrate, how to use TProEcc token to authenticate sessions based on JWT
 
 ## Files structure
 
