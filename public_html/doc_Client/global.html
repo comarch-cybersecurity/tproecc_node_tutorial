@@ -689,6 +689,152 @@
 
     
 
+    <h4 class="name" id="dgst"><span class="type-signature"></span>dgst<span class="signature">(msg)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Calculate SHA256 digest
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>msg</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">message</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line327">line 327</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    hex representation of SHA256 digest
+</div>
+
+
+
+    
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>var api = require('TProEccAPI');  var TProEccAPI = new api();  var dgst = TProEccAPI.dgst(msg);  </code></pre>
+
+
+
+        
+            
+
+    
+
     <h4 class="name" id="generateKey"><span class="type-signature"></span>generateKey<span class="signature">(param, callback)</span><span class="type-signature"></span></h4>
 
     
@@ -3153,7 +3299,7 @@
 
         <tr>
             
-                <td class="name"><code>pub</code></td>
+                <td class="name"><code>cert</code></td>
             
 
             <td class="type">
@@ -3169,7 +3315,7 @@
 
             
 
-            <td class="description last">hex representation of the public key</td>
+            <td class="description last">hex representation of the certificate</td>
         </tr>
 
     
@@ -3193,29 +3339,6 @@
             
 
             <td class="description last">slot ID (0xFF if key is not present)</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>name</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">key name</td>
         </tr>
 
     
@@ -3263,7 +3386,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line224">line 224</a>
+        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line312">line 312</a>
     </li></ul></dd>
     
 
@@ -3398,7 +3521,7 @@
 
         <tr>
             
-                <td class="name"><code>cert</code></td>
+                <td class="name"><code>pub</code></td>
             
 
             <td class="type">
@@ -3414,7 +3537,7 @@
 
             
 
-            <td class="description last">hex representation of the certificate</td>
+            <td class="description last">hex representation of the public key</td>
         </tr>
 
     
@@ -3438,6 +3561,29 @@
             
 
             <td class="description last">slot ID (0xFF if key is not present)</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">key name</td>
         </tr>
 
     
@@ -3485,7 +3631,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line312">line 312</a>
+        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line224">line 224</a>
     </li></ul></dd>
     
 
@@ -4710,13 +4856,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="errorCodes.html">errorCodes</a></li><li><a href="TProEccAPI.html">TProEccAPI</a></li></ul><h3>Global</h3><ul><li><a href="global.html#changePin">changePin</a></li><li><a href="global.html#deinit">deinit</a></li><li><a href="global.html#deleteKey">deleteKey</a></li><li><a href="global.html#generateKey">generateKey</a></li><li><a href="global.html#getCert">getCert</a></li><li><a href="global.html#getPubKey">getPubKey</a></li><li><a href="global.html#getPuk">getPuk</a></li><li><a href="global.html#getTokenInfo">getTokenInfo</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#sign">sign</a></li><li><a href="global.html#unblockPin">unblockPin</a></li><li><a href="global.html#writeCertificate">writeCertificate</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="errorCodes.html">errorCodes</a></li><li><a href="TProEccAPI.html">TProEccAPI</a></li></ul><h3>Global</h3><ul><li><a href="global.html#changePin">changePin</a></li><li><a href="global.html#deinit">deinit</a></li><li><a href="global.html#deleteKey">deleteKey</a></li><li><a href="global.html#dgst">dgst</a></li><li><a href="global.html#generateKey">generateKey</a></li><li><a href="global.html#getCert">getCert</a></li><li><a href="global.html#getPubKey">getPubKey</a></li><li><a href="global.html#getPuk">getPuk</a></li><li><a href="global.html#getTokenInfo">getTokenInfo</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#sign">sign</a></li><li><a href="global.html#unblockPin">unblockPin</a></li><li><a href="global.html#writeCertificate">writeCertificate</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue Feb 28 2017 08:12:12 GMT+0100 (Środkowoeuropejski czas stand.)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue Feb 28 2017 13:08:34 GMT+0100 (Środkowoeuropejski czas stand.)
 </footer>
 
 <script> prettyPrint(); </script>
