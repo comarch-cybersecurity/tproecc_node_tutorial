@@ -296,7 +296,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line88">line 88</a>
+        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line89">line 89</a>
     </li></ul></dd>
     
 
@@ -432,7 +432,233 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line74">line 74</a>
+        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line75">line 75</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="delCert"><span class="type-signature"></span>delCert<span class="signature">(param, callback)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    delete certificate
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>param</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">input parameters
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>pin</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">pin provided by user</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>pubKey</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">public key provided by user</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#delCertCallback">delCertCallback</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the callback that handles the response.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line365">line 365</a>
     </li></ul></dd>
     
 
@@ -658,7 +884,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line199">line 199</a>
+        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line235">line 235</a>
     </li></ul></dd>
     
 
@@ -681,152 +907,6 @@
 
 
 
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="dgst"><span class="type-signature"></span>dgst<span class="signature">(msg)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-<div class="description">
-    Calculate SHA256 digest
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>msg</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">message</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line329">line 329</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    hex representation of SHA256 digest
-</div>
-
-
-
-    
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>var api = require('TProEccAPI');  var TProEccAPI = new api();  var dgst = TProEccAPI.dgst(msg);  </code></pre>
 
 
 
@@ -842,7 +922,7 @@
 
 
 <div class="description">
-    Generate new public key-pair.
+    Generate new public key-pair (P256).
 </div>
 
 
@@ -1030,7 +1110,256 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line173">line 173</a>
+        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line174">line 174</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="generateKeyByType"><span class="type-signature"></span>generateKeyByType<span class="signature">(param, callback)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Generate new public key-pair.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>param</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">input parameters
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>pin</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">pin provided by user</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">key name provided by user</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">key type provided by user (P256, DTSU-367, DTSU-431)</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#generateKeyCallbackByType">generateKeyCallbackByType</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the callback that handles the response.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line203">line 203</a>
     </li></ul></dd>
     
 
@@ -1133,7 +1462,7 @@
             <td class="type">
             
                 
-<span class="param-type">getCertCallback</span>
+<span class="param-type"><a href="global.html#getCertCallback">getCertCallback</a></span>
 
 
             
@@ -1184,7 +1513,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line308">line 308</a>
+        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line344">line 344</a>
     </li></ul></dd>
     
 
@@ -1338,7 +1667,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line220">line 220</a>
+        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line256">line 256</a>
     </li></ul></dd>
     
 
@@ -1492,7 +1821,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line267">line 267</a>
+        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line303">line 303</a>
     </li></ul></dd>
     
 
@@ -1623,7 +1952,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line119">line 119</a>
+        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line120">line 120</a>
     </li></ul></dd>
     
 
@@ -1782,7 +2111,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line57">line 57</a>
+        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line58">line 58</a>
     </li></ul></dd>
     
 
@@ -2031,7 +2360,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line241">line 241</a>
+        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line277">line 277</a>
     </li></ul></dd>
     
 
@@ -2257,7 +2586,161 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line152">line 152</a>
+        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line153">line 153</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="updateTlsCert"><span class="type-signature"></span>updateTlsCert<span class="signature">(app, callback)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    update tls cert
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>app</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">signed application</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#updateTlsCertCallback">updateTlsCertCallback</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the callback that handles the response.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line390">line 390</a>
     </li></ul></dd>
     
 
@@ -2483,7 +2966,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line286">line 286</a>
+        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line322">line 322</a>
     </li></ul></dd>
     
 
@@ -2616,7 +3099,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line106">line 106</a>
+        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line107">line 107</a>
     </li></ul></dd>
     
 
@@ -2743,7 +3226,134 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line79">line 79</a>
+        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line80">line 80</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                
+
+    
+
+    <h4 class="name" id="delCertCallback"><span class="type-signature"></span>delCertCallback<span class="signature">(error)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>error</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">status of operation, EXIT_CODE_ACCEPT (0) means success</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line374">line 374</a>
     </li></ul></dd>
     
 
@@ -2870,7 +3480,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line207">line 207</a>
+        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line243">line 243</a>
     </li></ul></dd>
     
 
@@ -3164,7 +3774,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line181">line 181</a>
+        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line182">line 182</a>
     </li></ul></dd>
     
 
@@ -3195,7 +3805,347 @@
 
     
 
-    <h4 class="name" id="getPubKeyCallback"><span class="type-signature"></span>getPubKeyCallback<span class="signature">(error, data)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="generateKeyCallbackByType"><span class="type-signature"></span>generateKeyCallbackByType<span class="signature">(error, data)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>error</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">status of operation, EXIT_CODE_ACCEPT (0) means success</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>data</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">output
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>pub</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">hex representation of the public key</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>keyType</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">key type</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>serial</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">token serial number</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>pop</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">POP (proof of possesion) data
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>pd</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">hex representation of  POP data</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>sdn</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">hex representation of POP signature</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line212">line 212</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                
+
+    
+
+    <h4 class="name" id="getCertCallback"><span class="type-signature"></span>getCertCallback<span class="signature">(error, data)</span><span class="type-signature"></span></h4>
 
     
 
@@ -3386,7 +4336,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line314">line 314</a>
+        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line350">line 350</a>
     </li></ul></dd>
     
 
@@ -3631,7 +4581,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line226">line 226</a>
+        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line262">line 262</a>
     </li></ul></dd>
     
 
@@ -3830,7 +4780,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line273">line 273</a>
+        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line309">line 309</a>
     </li></ul></dd>
     
 
@@ -4236,7 +5186,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line131">line 131</a>
+        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line132">line 132</a>
     </li></ul></dd>
     
 
@@ -4363,7 +5313,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line63">line 63</a>
+        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line64">line 64</a>
     </li></ul></dd>
     
 
@@ -4562,7 +5512,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line250">line 250</a>
+        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line286">line 286</a>
     </li></ul></dd>
     
 
@@ -4689,7 +5639,134 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line160">line 160</a>
+        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line161">line 161</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                
+
+    
+
+    <h4 class="name" id="updateTlsCertCallback"><span class="type-signature"></span>updateTlsCertCallback<span class="signature">(error)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>error</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">status of operation, EXIT_CODE_ACCEPT (0) means success</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line397">line 397</a>
     </li></ul></dd>
     
 
@@ -4816,7 +5893,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line294">line 294</a>
+        <a href="tProEccAPI.js.html">tProEccAPI.js</a>, <a href="tProEccAPI.js.html#line330">line 330</a>
     </li></ul></dd>
     
 
@@ -4856,13 +5933,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="errorCodes.html">errorCodes</a></li><li><a href="TProEccAPI.html">TProEccAPI</a></li></ul><h3>Global</h3><ul><li><a href="global.html#changePin">changePin</a></li><li><a href="global.html#deinit">deinit</a></li><li><a href="global.html#deleteKey">deleteKey</a></li><li><a href="global.html#dgst">dgst</a></li><li><a href="global.html#generateKey">generateKey</a></li><li><a href="global.html#getCert">getCert</a></li><li><a href="global.html#getPubKey">getPubKey</a></li><li><a href="global.html#getPuk">getPuk</a></li><li><a href="global.html#getTokenInfo">getTokenInfo</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#sign">sign</a></li><li><a href="global.html#unblockPin">unblockPin</a></li><li><a href="global.html#writeCertificate">writeCertificate</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="errorCodes.html">errorCodes</a></li><li><a href="TProEccAPI.html">TProEccAPI</a></li></ul><h3>Global</h3><ul><li><a href="global.html#changePin">changePin</a></li><li><a href="global.html#deinit">deinit</a></li><li><a href="global.html#delCert">delCert</a></li><li><a href="global.html#deleteKey">deleteKey</a></li><li><a href="global.html#generateKey">generateKey</a></li><li><a href="global.html#generateKeyByType">generateKeyByType</a></li><li><a href="global.html#getCert">getCert</a></li><li><a href="global.html#getPubKey">getPubKey</a></li><li><a href="global.html#getPuk">getPuk</a></li><li><a href="global.html#getTokenInfo">getTokenInfo</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#sign">sign</a></li><li><a href="global.html#unblockPin">unblockPin</a></li><li><a href="global.html#updateTlsCert">updateTlsCert</a></li><li><a href="global.html#writeCertificate">writeCertificate</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Wed Mar 01 2017 20:37:48 GMT+0100 (Środkowoeuropejski czas stand.)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue Apr 11 2017 16:12:35 GMT+0200 (Środkowoeuropejski czas letni)
 </footer>
 
 <script> prettyPrint(); </script>
