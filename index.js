@@ -6,9 +6,39 @@ var express_utils = require('./shared_libs/express_utils');
 var tProEcc = new TProEcc();
 var users_db = require('./shared_libs/users_db');
 
+
+
+
+// var express = require('express');
+// var app = express();
+
+// app.set('port', (process.env.PORT || 5000));
+
+// app.use(express.static(__dirname + '/public'));
+
+// // views is directory for all template files
+// app.set('views', __dirname + '/views');
+// app.set('view engine', 'ejs');
+
+// app.get('/', function(request, response) {
+  // response.render('pages/index');
+// });
+
+// app.listen(app.get('port'), function() {
+  // console.log('Node app is running on port', app.get('port'));
+// });
+
+
+
+
+
+
+
+
+
 // start express server hosting lessons' static files
 // port=3100, lesson number=1
-var app = express_utils.startExpressServer(3100, 1);
+var app = express_utils.startExpressServer((process.env.PORT || 5000), 1);
 
 // redirect root directory to particular tutorial html page
 app.get('/', function (req, res) {
