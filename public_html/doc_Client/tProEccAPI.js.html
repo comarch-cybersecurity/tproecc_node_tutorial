@@ -147,8 +147,8 @@ TProEccAPI.prototype.changePin = function(param, callback)
 };
 /**
  * Return information about the token.
- * @function getTokenInfo
- * @param {getTokenInfoCallback} cb - The callback that handles the response.
+ * @function getTokenInfoExt
+ * @param {getTokenInfoExtCallback} cb - The callback that handles the response.
  *
  * @example
  * //return {"init":true,"keyc":1,"pinmin":4,"pinmax":4,"pin":3,"puk":-1,"sn":"0123039C10588732EE","fw":"1.0.35","pub":"0485de6a646383d5aebb96089663ad244ad88a9d0fea8427c814dea8afd1e0db66e67d666b285456435228b5f7282546f922fbd036232a0de5e9943a5960610d4b","pop":{"pd":"0000000123039c10588732ee3a5e4a52de4ddc9e4014d9f39330e2a784be82183621b217c81e769f8eb9ef3f","sgn":"304402205fc08cf710dc3a0fb6293946641795d1a0ef048ee65734b1f92549e0f3795ded022023df93d3bbf63fd9c6c9f3c34cdaff8dcab40a386e0d5236c2753ccdad5ef85c0000"}}
@@ -158,19 +158,16 @@ TProEccAPI.prototype.changePin = function(param, callback)
  * });
  */
 /**
- * @callback getTokenInfoCallback
+ * @callback getTokenInfoExtCallback
  * @param {number}  error - status of operation, null means success
  * @param {Object}  data - information about token
  * @param {boolean} data.init - token is initalized (true/false)
  * @param {number}  data.pin - pin tries left
- * @param {number}  data.puk - puk tries left, 0xff mean puk not set
  * @param {number}  data.pinmin - min pin lenght
  * @param {number}  data.pinmax - max pin lenght
  * @param {number}  data.keyc - number of keys
  * @param {string}  data.sn - token serial number
  * @param {string}  data.fw - firmware version
- * @param {string}  data.kn0 - first key's name
- * @param {string}  data.kn{data.keyc} - last key's name
  *
  */
 TProEccAPI.prototype.getTokenInfo = function(callback)
@@ -178,7 +175,8 @@ TProEccAPI.prototype.getTokenInfo = function(callback)
 	var app = this.GET_TOKEN_INFO_APP;
     this.c.doConnect(app, callback);
 }
-/**
+
+/*
  * Unblock PIN using PUK code.
  * @function unblockPin
  * @param {Object}  param - input parameters
@@ -186,10 +184,11 @@ TProEccAPI.prototype.getTokenInfo = function(callback)
  * @param {string}  param.pin - pin provided by user
  * @param {unblockPinCallback} callback - the callback that handles the response.
  */
- /**
+ /*
  * @callback unblockPinCallback
  * @param {number}  error - status of operation, EXIT_CODE_ACCEPT (0) means success
  */
+ /*
 TProEccAPI.prototype.unblockPin = function(param, callback)
 {
     var app = this.UNBLOCK_PIN_APP;
@@ -199,6 +198,7 @@ TProEccAPI.prototype.unblockPin = function(param, callback)
     app = this.u.replaceRes( app,  this.PIN_APP_REPLACE_STRING, pinHex );
     this.c.doConnect(app, callback);
 }
+*/
 /**
  * Generate new public key-pair (P256).
  * @function generateKey
@@ -211,6 +211,7 @@ TProEccAPI.prototype.unblockPin = function(param, callback)
  * @callback generateKeyCallback
  * @param {number}  error - status of operation, EXIT_CODE_ACCEPT (0) means success
  * @param {Object}  data - output
+ * @param {string}  data.sn - token serial number
  * @param {string}  data.pub - hex representation of the public key
  * @param {Object}  data.pop - POP (proof of possesion) data
  * @param {string}  data.pop.pd - hex representation of  POP data
@@ -228,7 +229,7 @@ TProEccAPI.prototype.generateKey = function(param, callback)
 
 
 
-/**
+/*
  * Generate new public key-pair.
  * @function generateKeyByType
  * @param {Object}  param - input parameters
@@ -237,10 +238,11 @@ TProEccAPI.prototype.generateKey = function(param, callback)
  * @param {string}  param.name - key type provided by user (P256, DTSU-367, DTSU-431)
  * @param {generateKeyCallbackByType} callback - the callback that handles the response.
  */
-/**
+/*
  * @callback generateKeyCallbackByType
  * @param {number}  error - status of operation, EXIT_CODE_ACCEPT (0) means success
  * @param {Object}  data - output
+ * @param {string}  data.sn - token serial number
  * @param {string}  data.pub - hex representation of the public key
  * @param {string}  data.keyType - key type
  * @param {string}  data.serial - token serial number
@@ -248,6 +250,7 @@ TProEccAPI.prototype.generateKey = function(param, callback)
  * @param {string}  data.pop.pd - hex representation of  POP data
  * @param {string}  data.pop.sdn - hex representation of POP signature
  */
+ /*
 TProEccAPI.prototype.generateKeyByType = function(param, callback)
 {
     var app = this.GENERATE_KEY_APP;
@@ -257,7 +260,7 @@ TProEccAPI.prototype.generateKeyByType = function(param, callback)
     app = this.u.replaceRes( app,  this.PIN_APP_REPLACE_STRING, pinHex );
     this.c.doConnect(app, callback);
 }
-
+*/
 
 
 /**
@@ -291,6 +294,7 @@ TProEccAPI.prototype.deleteKey = function(param, callback)
  * @callback getPubKeyCallback
  * @param {number}  error - status of operation, EXIT_CODE_ACCEPT (0) means success
  * @param {Object}  data - output
+ * @param {string}  data.sn - token serial number
  * @param {string}  data.pub - hex representation of the public key
  * @param {number}  data.id - slot ID (0xFF if key is not present)
  * @param {string}  data.name - key name
@@ -315,6 +319,7 @@ TProEccAPI.prototype.getPubKey = function(param, callback)
  * @callback signCallback
  * @param {number}  error - status of operation, EXIT_CODE_ACCEPT (0) means success
  * @param {Object}  data - output
+ * @param {string}  data.sn - token serial number
  * @param {string}  data.sgn - hex representation of the signature
  */
 TProEccAPI.prototype.sign = function(param, callback)
@@ -328,18 +333,21 @@ TProEccAPI.prototype.sign = function(param, callback)
     app = this.u.replaceRes( app,  this.PIN_APP_REPLACE_STRING, pinHex );
     this.c.doConnect(app, callback);
 }
-/**
+
+
+/*
  * Get PUK code stored on the token.
  * @function getPuk
  * @param {string}  param - pin provided by user
  * @param {getPukCallback} callback - the callback that handles the response.
  */
- /**
+ /*
  * @callback getPukCallback
  * @param {number}  error - status of operation, EXIT_CODE_ACCEPT (0) means success
  * @param {Object}  data - output
  * @param {string}  data.puk - hex representation of the puk
  */
+ /*
 TProEccAPI.prototype.getPuk = function(param, callback)
 {
     var app = this.GET_PUK_APP;
@@ -347,6 +355,8 @@ TProEccAPI.prototype.getPuk = function(param, callback)
     app = this.u.replaceRes( app,  this.PIN_APP_REPLACE_STRING, pinHex );
     this.c.doConnect(app, callback);
 }
+*/
+
 /**
  * Write certificate to be stored on the token.
  * @function writeCertificate
@@ -414,6 +424,23 @@ TProEccAPI.prototype.delCert = function(param, callback)
 }
 
 
+/**
+ * calculate SHA256 digest
+ * @function dgst
+ * @param {string}  msg - message
+ * @return hex representation of SHA256 digest
+ *
+ * @example
+ * var api = require('TProEccSimpleAPI');
+ * var TProEccAPI = new api();
+ * var dgst = TProEccAPI.dgst(msg);
+ */
+TProEccSimpleAPI.prototype.dgst = function(msg) {
+	var createHash = require('sha.js');
+	var sha256 = createHash('sha256');
+	return sha256.update(msg).digest('hex');
+};
+
 
 /**
  * update tls cert
@@ -425,6 +452,7 @@ TProEccAPI.prototype.delCert = function(param, callback)
  /**
  * @callback updateTlsCertCallback
  * @param {number}  error - status of operation, EXIT_CODE_ACCEPT (0) means success
+ * @param {string}  data.sn - token serial number
  */
 TProEccAPI.prototype.runApp = function(app, callback)
 {
@@ -443,13 +471,13 @@ module.exports = TProEccAPI;
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="errorCodes.html">errorCodes</a></li><li><a href="TProEccAPI.html">TProEccAPI</a></li></ul><h3>Global</h3><ul><li><a href="global.html#changePin">changePin</a></li><li><a href="global.html#deinit">deinit</a></li><li><a href="global.html#delCert">delCert</a></li><li><a href="global.html#deleteKey">deleteKey</a></li><li><a href="global.html#generateKey">generateKey</a></li><li><a href="global.html#generateKeyByType">generateKeyByType</a></li><li><a href="global.html#getCert">getCert</a></li><li><a href="global.html#getPubKey">getPubKey</a></li><li><a href="global.html#getPuk">getPuk</a></li><li><a href="global.html#getTokenInfo">getTokenInfo</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#sign">sign</a></li><li><a href="global.html#unblockPin">unblockPin</a></li><li><a href="global.html#updateTlsCert">updateTlsCert</a></li><li><a href="global.html#writeCertificate">writeCertificate</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="errorCodes.html">errorCodes</a></li><li><a href="TProEccAPI.html">TProEccAPI</a></li></ul><h3>Global</h3><ul><li><a href="global.html#changePin">changePin</a></li><li><a href="global.html#deinit">deinit</a></li><li><a href="global.html#delCert">delCert</a></li><li><a href="global.html#deleteKey">deleteKey</a></li><li><a href="global.html#dgst">dgst</a></li><li><a href="global.html#generateKey">generateKey</a></li><li><a href="global.html#getCert">getCert</a></li><li><a href="global.html#getPubKey">getPubKey</a></li><li><a href="global.html#getTokenInfoExt">getTokenInfoExt</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#sign">sign</a></li><li><a href="global.html#updateTlsCert">updateTlsCert</a></li><li><a href="global.html#writeCertificate">writeCertificate</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue Apr 11 2017 16:54:17 GMT+0200 (Środkowoeuropejski czas letni)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue Apr 18 2017 09:47:54 GMT+0200 (Środkowoeuropejski czas letni)
 </footer>
 
 <script> prettyPrint(); </script>
