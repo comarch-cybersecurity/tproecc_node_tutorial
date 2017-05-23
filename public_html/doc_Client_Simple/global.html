@@ -372,7 +372,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tProEccSimpleAPI.js.html">tProEccSimpleAPI.js</a>, <a href="tProEccSimpleAPI.js.html#line193">line 193</a>
+        <a href="tProEccSimpleAPI.js.html">tProEccSimpleAPI.js</a>, <a href="tProEccSimpleAPI.js.html#line195">line 195</a>
     </li></ul></dd>
     
 
@@ -508,7 +508,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tProEccSimpleAPI.js.html">tProEccSimpleAPI.js</a>, <a href="tProEccSimpleAPI.js.html#line227">line 227</a>
+        <a href="tProEccSimpleAPI.js.html">tProEccSimpleAPI.js</a>, <a href="tProEccSimpleAPI.js.html#line229">line 229</a>
     </li></ul></dd>
     
 
@@ -1044,7 +1044,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tProEccSimpleAPI.js.html">tProEccSimpleAPI.js</a>, <a href="tProEccSimpleAPI.js.html#line158">line 158</a>
+        <a href="tProEccSimpleAPI.js.html">tProEccSimpleAPI.js</a>, <a href="tProEccSimpleAPI.js.html#line159">line 159</a>
     </li></ul></dd>
     
 
@@ -1072,6 +1072,160 @@
     <h5>Example</h5>
     
     <pre class="prettyprint"><code>//returns {"sgn":"304502203625b6685f1c62b36787580f0cf0d600e4a4643472a79ec749d3925c9d473e9f02210080ab73adf8c8529d9bfe53f6336ba83d173fd8936581e67d9557355c428ea57a00"}var api = require('TProEccSimpleAPI');var TProEccAPI = new api();var param = {};param.pin = pin;param.hash = hash;TProEccAPI.getTokenInfo(param, function(err, data) {  if(err === null) alert (JSON.stringify(data); else alert( "error:"+err.desc+" ("+err.err+")");});</code></pre>
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="updateTlsCert"><span class="type-signature"></span>updateTlsCert<span class="signature">(app, callback)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    update tls cert
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>app</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">signed application</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#updateTlsCertCallback">updateTlsCertCallback</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the callback that handles the response.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="tProEccSimpleAPI.js.html">tProEccSimpleAPI.js</a>, <a href="tProEccSimpleAPI.js.html#line248">line 248</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1182,7 +1336,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tProEccSimpleAPI.js.html">tProEccSimpleAPI.js</a>, <a href="tProEccSimpleAPI.js.html#line212">line 212</a>
+        <a href="tProEccSimpleAPI.js.html">tProEccSimpleAPI.js</a>, <a href="tProEccSimpleAPI.js.html#line214">line 214</a>
     </li></ul></dd>
     
 
@@ -1313,6 +1467,29 @@
     </thead>
 
     <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>sn</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">token serial number</td>
+        </tr>
+
     
 
         <tr>
@@ -1611,6 +1788,29 @@
 
         <tr>
             
+                <td class="name"><code>sn</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">token serial number</td>
+        </tr>
+
+    
+
+        <tr>
+            
                 <td class="name"><code>sgn</code></td>
             
 
@@ -1675,7 +1875,134 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tProEccSimpleAPI.js.html">tProEccSimpleAPI.js</a>, <a href="tProEccSimpleAPI.js.html#line178">line 178</a>
+        <a href="tProEccSimpleAPI.js.html">tProEccSimpleAPI.js</a>, <a href="tProEccSimpleAPI.js.html#line179">line 179</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                
+
+    
+
+    <h4 class="name" id="updateTlsCertCallback"><span class="type-signature"></span>updateTlsCertCallback<span class="signature">(error)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>error</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">status of operation, EXIT_CODE_ACCEPT (0) means success</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="tProEccSimpleAPI.js.html">tProEccSimpleAPI.js</a>, <a href="tProEccSimpleAPI.js.html#line255">line 255</a>
     </li></ul></dd>
     
 
@@ -1715,13 +2042,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="errorCodes.html">errorCodes</a></li><li><a href="TProEccSimpleAPI.html">TProEccSimpleAPI</a></li></ul><h3>Global</h3><ul><li><a href="global.html#changePin">changePin</a></li><li><a href="global.html#dgst">dgst</a></li><li><a href="global.html#e">e</a></li><li><a href="global.html#getTokenInfo">getTokenInfo</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#sign">sign</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="errorCodes.html">errorCodes</a></li><li><a href="TProEccSimpleAPI.html">TProEccSimpleAPI</a></li></ul><h3>Global</h3><ul><li><a href="global.html#changePin">changePin</a></li><li><a href="global.html#dgst">dgst</a></li><li><a href="global.html#e">e</a></li><li><a href="global.html#getTokenInfo">getTokenInfo</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#sign">sign</a></li><li><a href="global.html#updateTlsCert">updateTlsCert</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Wed Mar 01 2017 20:37:47 GMT+0100 (Środkowoeuropejski czas stand.)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Thu May 11 2017 09:24:50 GMT+0200 (Środkowoeuropejski czas letni)
 </footer>
 
 <script> prettyPrint(); </script>
