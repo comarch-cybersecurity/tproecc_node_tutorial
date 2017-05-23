@@ -93,10 +93,6 @@ app.get('/verifySignature/:userId/:messageDigest/:signature',
 
             var verifyResult = tProEcc.verifySignature(result.publicKey, messageDigest,
                 signatureHex);
-            if (!verifyResult.result) {
-                res.status(400).send(verifyResult.result.toString() + ":" + verifyResult.err);
-                return;
-            }
             res.status(201).send(verifyResult.result.toString());
         });
     });

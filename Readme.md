@@ -1,5 +1,5 @@
 # tProEcc Node.js Tutorial
-code version 1.0.94
+code version 1.0.95
 
 > This project is dedicated for TProEcc device owners. If you don't posses TProEcc value of presented subjects will be very limited for you.
 

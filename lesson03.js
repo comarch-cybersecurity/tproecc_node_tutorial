@@ -42,11 +42,9 @@ app.get('/getAuthToken/:userId', function (req, res) {
             return;
         }
         if (!data) {
-            ////  res.status(400).send("no such user");
-            //    return;
+            res.status(400).send("no such user");
+            return;
         }
-
-
         req.session.authToken = authToken;
         req.session.authenticated = false;
         req.session.pubkey = data;
