@@ -19,8 +19,8 @@ app.get('/', function (req, res) {
    GET /registerUser/{userId}/{publicKeyHex}
 
    Request arguments:
-   â€¢  userId (required) â€“ name of the user to be created
-   â€¢  publicKeyHex (required) â€“ hex representation of the public key linked with the user
+   •  userId (required) – name of the user to be created
+   •  publicKeyHex (required) – hex representation of the public key linked with the user
 
    Request response:
    Returned if the user was successfully registered.

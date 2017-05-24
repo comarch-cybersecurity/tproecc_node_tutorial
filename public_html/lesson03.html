@@ -118,25 +118,6 @@
 		</div>
 	</div>
 
-	<!--
-		GET /restrictedCall
-	-->
-	<div id="restrictedCall" class="row">
-		<div class="col s6 offset-s3">
-			<div class="card grey lighten-3">
-				<div class="card-content black-text">
-					<h4>GET /restrictedCall</h4>
-					<p>Call to server side rest api - invocation of restricted API, which requires authentication.</p>
-					<div class="card-action">
-						<a class="btn waves-effect waves-light" id="buttonRestrictedCall" modal>GET /restrictedCall...</a>
-						<a onclick="showCode(restrictedCall);" class="waves-effect waves-light btn modal-trigger">Show Code</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-
 	<div id="dialogs"></div>
 
 </body>
@@ -152,8 +133,7 @@
 	$("#getAuthToken").hide();
 	$("#signAuthToken").hide();
 	$("#doAuth").hide();
-	//$("#restrictedCall").hide();
-
+	
 	/***
 	 getTokenInfo
 	 ***/
@@ -240,20 +220,6 @@
 			});
 	}
 
-	/***
-	 getTokenInfo
-	 ***/
-	$('#buttonRestrictedCall').click(restrictedCall);
-
-	function restrictedCall() {
-		var url = "/restrictedCall";
-		$.get(url, function(data) {
-				showDialogInfo("GET /restrictedCall...", data);
-			})
-			.fail(function(jqXHR) {
-				showDialogError("GET /restrictedCall...", jqXHR.responseText);
-			});
-	}
 
 
 </script>
